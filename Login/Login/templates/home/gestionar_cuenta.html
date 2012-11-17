@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}
+	Mi Cuenta
+{% endblock %}
+{% block content %}
+<ul class="nav nav-tabs" >
+			<li > <a href="#">Inicio</a></li>			
+			<li> <a href="#">Crear Formulario</a></li>				
+			<li > <a href="{% url vista_subjects %}">Ver Asignaturas*</a></li>
+			<li class="active"> <a href="{% url vista_account %}">Gestionar Cuenta*</a></li>
+			<li> 
+				<a Align="Right" href="{% url vista_logout %}">Cerrar Sesion</a>
+			    
+			</li>		
+		
+			
+</ul>
+
+	<form>
+		<div class="gestion-cuenta">
+			Correo Electrónico:		  
+			<input type="text" name="Email" placeholder="Su correo aqui...">
+		    </input>
+		    <br>
+			Contraseña Anterior:	
+			<input type="text" name="Password" placeholder="Su contraseña aqui...">
+		    </input>
+		    <br>
+			Contraseña Nueva:		
+			<input type="text" name="NewPassword" placeholder="Su nueva contraseña...">
+		    </input>
+		    <br>
+			Repetir Contraseña:		
+			<input type="text" name="NewPass" placeholder="Su nueva contraseña aqui...">
+		    </input>
+		    <br>
+			<button style="margin-bottom:9px" type="submit" class="btn btn-danger" > 
+				Guardar Cambios
+			</button>
+		</div>
+	</form>
+{% endblock %}

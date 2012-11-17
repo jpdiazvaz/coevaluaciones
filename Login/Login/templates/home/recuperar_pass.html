@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+	Recuperar Contraseña
+{% endblock %}
+{% block content %}
+	<DIV Align=Center>
+		<h2> Recuperar Contraseña </h2>
+		{% if info_enviado %}
+			Información enviada al correo destino <br>
+		{% else %}
+			<p> Ingrese su dirección de correo electrónico para enviarle la información necesaria para recuperar su contraseña </p>
+			<form>
+				Correo Electrónico: 
+				<input type="text" name="Email" placeholder="Escriba su correo aqui...">
+			    </input>
+			    
+				<button style="margin-bottom:9px" type="submit" class="btn btn-warning" > 
+					Reestablecer Contraseña
+				</button>
+			</form>
+		{% endif %}
+	</DIV>
+{% endblock %}

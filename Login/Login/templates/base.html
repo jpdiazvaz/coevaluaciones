@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>
+		{% block title %} Titulo Base {% endblock %}
+	</title>
+	{% block js %}
+	<script type="text/javascript" src="/media/css/prefix-free.js"></script>
+	<script type="text/javascript">
+	$("tr").click(function(){
+		$(this).slideUp();
+
+	});
+
+	function activar(){
+		var ob=document.getElementsByName("table");
+		for (var i = 0; i < ob.childNode.length; i++) {
+			alert(ob[i].childNode.childNode.childNode.nodeValue);
+		};
+	}
+	alert("hola");
+
+	</script>
+
+	{% endblock %}
+	{% block css %}
+		<link rel="stylesheet" href="/media/css/bootstrap.css">
+		<link rel="stylesheet" href="/media/css/estilo-distribucion-mejora.css">
+	{% endblock %}
+</head>
+<body>
+	<header>
+		<nav>
+			<DIV Align="Center">
+			<a href="{% url vista_principal%}">
+			 <img src="/media/img/escudo_titulo.jpg"/> </a> 
+			
+
+
+			</DIV>
+			{% if user.is_authenticated %}
+				<div Align="Center">
+					<h4> Bienvenid@ {{ user.first_name }} {{ user.last_name }} </h4>
+				</div>	
+		
+		
+
+<!--				<DIV style="text-align:right; margin-right: 12px">
+					
+					<a href="{% url vista_logout %}"> Cerrar Sesion </a>
+				</DIV> -->
+			{% endif %}
+		</nav>
+	</header>
+	<section>
+		{% block content %}
+		{% endblock %}
+	</section>
+</html>

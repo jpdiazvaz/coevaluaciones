@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}
+	Asignatura: Introduccion a la Programacion
+{% endblock %}
+{% block content %}
+	Codigo: INFO 013
+	Semestre: I
+	Año: 2012
+	Nombre: Introduccion a la Programacion
+	<ul class="nav nav-tabs" >
+			<li > <a href="#">Home</a></li>			
+			<li> <a href="#">Crear Formulario</a></li>				
+			<li class="active" > <a href="{% url vista_subjects %}">Ver Asignaturas*</a></li>
+			<li> <a href="{% url vista_account %}">Gestionar Cuenta*</a></li>
+			<li> 
+				<a Align="Right" href="{% url vista_logout %}">Cerrar Sesion</a>
+			    
+			</li>		
+		
+			
+	</ul>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Código</th>
+				<th>Nombre</th>
+				<th>Semestre</th>
+				<th>Año</th>				
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>INFO 013</td>
+				<td>Introduccion a la Programacion</td>
+				<td>I</td>
+				<td>2012</td>
+				
+			</tr>			
+		</tbody>
+	</table>
+
+	
+	
+		<form style="text-align:center">
+		Buscar Alumno:
+		<br>
+		RUT: 	
+		<input type="text" name="Buscar alumno" placeholder="Ingrese alumno aqui..."></input>
+		<input type="submit" class="btn btn-primary" value="Buscar"></input>
+		</form>
+	
+	<footer Align="Left">
+		<a href="/" class="btn">Volver</a>
+	</footer>
+{% endblock %}

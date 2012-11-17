@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}
+	Asignatura: Introduccion a la Programacion
+{% endblock %}
+{% block content %}
+	Codigo: INFO 013
+	Semestre: I
+	Año: 2012
+	Nombre: Introduccion a la Programacion
+	<ul class="nav nav-tabs" >
+			<li > <a href="#">Inicio</a></li>			
+			<li> <a href="#">Crear Formulario</a></li>				
+			<li class="active" > <a href="{% url vista_subjects %}">Ver Asignaturas*</a></li>
+			<li> <a href="{% url vista_account %}">Gestionar Cuenta*</a></li>
+			<li> 
+				<a Align="Right" href="{% url vista_logout %}">Cerrar Sesion</a>
+			    
+			</li>		
+		
+			
+	</ul>
+
+	<div class="menu-vertical">
+	<ul class="nav nav-tabs nav-stacked span3">
+		<li> <a href="#">Ver Evaluaciones Anteriores</a></li>
+		<li class="active"> <a href="#">Realizar Evaluacion</a></li>			
+		
+	</ul>
+	</div>
+	
+	<a href="/" class="btn btn-primary">Cargar Ultima Configuración</a>
+	<a href="{% url vista_distribution1 %}" class="btn btn-primary">Nueva Distribución</a>
+
+{% endblock %}

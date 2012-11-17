@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>
+			{% block title %} Titulo Base {% endblock %}
+		</title>
+		{% block css %}
+			<link rel="stylesheet" href="/media/css/bootstrap.css">
+		{% endblock %}
+	</head>
+	<body>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<button class="btn btn-navbar" data-target=" .nav-collapse" data-toggle="collapse" type="button">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="brand" href="/index.html"> Sistema *evaluacion </a>
+					<div class="nav-collapse collapse">
+						<ul class="nav">
+							<li class="active">
+								<a href="/index.html"> Home </a>
+							</li>
+							<li class="active">
+								<a href="/index.html"> Evaluaciones </a>
+							</li>
+							<li class="active">
+								<a href="/index.html"> Formularios </a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<section>
+			{% block content %}
+			{% endblock %}
+		</section>
+	</body>
+</html>

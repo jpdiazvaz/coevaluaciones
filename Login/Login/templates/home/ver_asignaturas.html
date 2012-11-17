@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}
+	Asignaturas
+{% endblock %}
+{% block content %}
+<ul class="nav nav-tabs" >
+			<li > <a href="#">Inicio</a></li>			
+			<li> <a href="#">Crear Formulario</a></li>				
+			<li class="active"> <a href="{% url vista_subjects %}">Ver Asignaturas*</a></li>
+			<li> <a href="{% url vista_account %}">Gestionar Cuenta*</a></li>
+			<li> 
+				<a Align="Right" href="{% url vista_logout %}">Cerrar Sesion</a>
+			    
+			</li>		
+		
+			
+</ul>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Código</th>
+				<th>Nombre</th>
+				<th>Semestre</th>
+				<th>Año</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>INFO 013</td>
+				<td>Introduccion a la Programacion</td>
+				<td>II</td>
+				<td>2012</td>
+				<td><a href="{% url vista_subject1 %}" class="btn">Ver</button></td>
+
+			</tr>
+			<tr>
+				<td>INFO 015</td>
+				<td>Taller de Ingenieria I</td>
+				<td>I</td>
+				<td>2012</td>
+				<td><a href="#" class="btn">Ver</button></td>
+			</tr>
+			<tr>
+				<td>INFO 012</td>
+				<td>Programacion I</td>
+				<td>II</td>
+				<td>2012</td>
+				<td><a href="#" class="btn">Ver</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+<footer Align="Left">
+	<a href="/" class="btn btn-primary">Volver</a>
+</footer>
+{% endblock %}

@@ -1,0 +1,89 @@
+.principal{
+	margin: 0px;
+	height: 750px;
+
+}
+
+.menu-vertical{
+	margin-bottom: 0px;	
+	padding: 0px;
+	float: left;
+
+}
+
+.contenedor-principal{
+
+	float: right;
+	width: 1010px;
+	height: 650px;
+
+}
+
+.sub-contenedor1{
+	float: left;
+	width: 450px;
+	height: 595px;
+	margin-left: 10px;
+
+}
+
+.sub-contenedor2{
+	float: right;
+	width: 450px;
+	height: 595px;
+	margin-right: 10px;
+}
+
+.contenedor-tabla-grupos{
+	float: left;
+	width: 200px;
+
+    position: relative;
+    height: 580px;
+    overflow-bottom: auto;
+
+}
+
+.contenedor-alumnos-sin-grupo{
+
+	height: 500px;
+	position: relative;	
+	overflow: auto;	
+
+}
+.contenedor-botones{
+	height: 40px;	
+}
+.contenedor-grupos{
+	width: 445px;	
+	height: 350px;
+}
+
+.contenedor-tabla-grupos{
+	width: 270px;
+	height: 350px;
+	position: relative;	
+	overflow: auto;
+	float: left;
+}
+.botones-contenedor-grupos{
+	float: right;
+	width: 160px;	
+	height: 200px;
+}
+.contenedor-alumnos-asignados{
+	
+	float: left;
+	width: 445px;
+	height: 230px;
+	margin-bottom:10px;
+
+}
+
+.contenedor-tabla-alumnos-asignados{
+	float: left;
+	position: relative;	
+    height: 220px;
+    width: 440px;
+	overflow: auto;	
+}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}
+	Pagina-Intermedia
+{% endblock %}
+{% block content %}
+	<ul class="nav nav-tabs pills" >
+			<li > <a href="{% url vista_subjects %}">Ver Asignaturas</a></li>
+			<li class="active"> <a href="{% vista_account %}">Gestionar Cuenta</a></li>
+			<li> 
+				<a Align="Right" href="{% url vista_logout %}">Cerrar Sesion</a>
+			    
+			</li>		
+		
+			
+		</ul>
+{% endblock %}

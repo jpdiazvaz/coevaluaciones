@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+	Login
+{% endblock %}
+{% block content %}
+	<form action="." method="POST">
+		{% csrf_token %}
+		{{ mensaje }}
+		<DIV ALIGN=center>
+			{{ form.as_p }}
+			<button type="submit" class = "btn btn-primary">
+				<b> Ingresar </b>
+			</button>
+			<a href="{% url vista_recuperar %}"> Recuperar Contraseña </a>
+		</DIV>
+	</form>
+{% endblock %}

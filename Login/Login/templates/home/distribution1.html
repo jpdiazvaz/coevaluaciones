@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% block title %}
+	Asignatura: Introduccion a la Programacion
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+	function activar(){
+		var ob=document.getElementById("tabla1");		
+		for (var i = 0; i < ob.childNodes[0].childNodes[0].length; i++) {
+			alert(ob.childNodes[i].childNodes[0].nodeValue);
+		};
+	}
+	
+$(function () {
+
+        $("#btn-continuar").click(function () {
+
+            $("#tabla1 .table tbody tr").each(function (index) {
+
+                var campo1, campo2, campo3;
+                $(this).children("td").each(function (index2) {
+                    switch (index2) {
+                        case 0:
+                            campo1 = $(this).text();
+                          break;
+                      case 1:
+                          campo2 = $(this).text();
+
+                          break;
+                      case 2:
+                          campo3 = $(this).text();
+                          break;
+                  }
+              $(this).css("background-color", "#ECF8E0");
+              });
+          alert(campo1 + ' - ' + campo2 + ' - ' + campo3);
+
+
+          })
+
+ })
+})
+
+
+
+</script>
+
+{% endblock %}
+
+{% block content %}
+	Codigo: INFO 013
+	Semestre: I
+	Año: 2012
+	Nombre: Introducción a la Programación
+	<div>
+		<ul class="nav nav-tabs" >
+				<li > <a href="#">Inicio</a></li>			
+				<li> <a href="#">Crear Formulario</a></li>				
+				<li class="active" > <a href="{% url vista_subjects %}">Ver Asignaturas*</a></li>
+				<li> <a href="{% url vista_account %}">Gestionar Cuenta*</a></li>
+				<li> 
+					<a Align="Right" href="{% url vista_logout %}">Cerrar Sesion</a>
+				    
+				</li>		
+				
+		</ul>
+	</div>
+
+	<div class="principal">
+		<div class="menu-vertical">
+			<ul class="nav nav-tabs nav-stacked span3">
+				<li> <a href="#">Ver Evaluaciones Anteriores</a></li>
+				<li class="active"> <a href="#">Realizar Evaluación</a></li>
+				<li> <a href="#">Agregar Alumnos</a></li>		
+				
+			</ul>
+		</div>
+	
+		<div class="contenedor-principal">
+
+			<p>
+				<a href="/" class="btn btn-primary">Cargar Ultima Configuración</a>
+				<a href="#" class="btn btn-primary">Nueva Distribución</a>
+			<p>			
+			<div class="sub-contenedor1">
+				
+				<p> Alumnos sin grupos: </p>
+				<!--<div class="division1"></div>-->
+				<div id="tabla1">
+					<table class="table">		
+					<tbody>
+						<tr>
+						<td>Andres Contreras</td>
+						</tr>
+						<tr>
+						<td>Francisca Delgado</td>
+						</tr>
+						<tr>
+						<td>Diego Gutierrez</td>
+						</tr>
+						<tr>
+						<td>Andres Contreras</td>
+						</tr>
+					    <tr>
+						<td>Andres Contreras</td>
+						</tr>
+						<tr>
+						<td>Andres Contreras</td>
+						</tr>
+						<tr>
+						<td>Andres Contreras</td>
+						</tr>
+						<tr>
+						<td>Andres Contreras</td>
+						</tr>
+						<tr>
+						<td>Andres Contreras</td>
+						</tr>
+						<tr>
+						<td>Andres Contreras</td>
+						</tr>
+						<tr>
+						<td>Andres Contreras</td>
+						</tr>
+						<tr>
+						<td>Andres Contreras</td>
+						</tr>
+						<tr>
+						<td>Andres Contreras</td>
+						</tr>
+						<tr>
+						<td>Andres Contreras</td>
+						</tr>
+						<tr>
+						<td>Andres Contreras</td>
+						</tr>
+						<tr>
+						<td>Andres Contreras</td>
+						</tr>
+					
+
+					</tbody>
+					</table>		
+				</div>		
+							
+			
+				<div id="botones1">									
+				<a href="{% url vista_agregar_alumno1 %}" class="btn">Agregar Alumno</a>	
+				<button type="submit" class="btn btn-primary">Guardar Distribución</button>
+				<button type="submit" class="btn btn-primary" id="btn-continuar">Continuar</button>
+				</div>
+			
+			
+
+			</div>
+
+			<div class="sub-contenedor2">
+				
+				<div id="botones2">
+				<p>
+				<button type="submit" class="btn btn-success">Crear Grupo</button>
+				</p>
+				<p>
+				<button type="submit" class="btn btn-warning">Eliminar Grupo</button>
+				</p>
+				</div>
+
+				<div class="tabla2">
+				<table class="table">		
+				<tbody>
+					<tr>
+					<td>Grupo 1</td>
+					</tr>
+					<tr>
+					<td>Grupo 2</td>
+					</tr>
+					<tr>
+					<td>Grupo 3</td>
+					</tr>
+					<tr>
+					<td>Grupo 4</td>
+					</tr>										
+					<tr>
+					<td>Grupo 5</td>
+					</tr>
+				</tbody>					
+				</table>
+				</div>
+
+				
+
+				<!--<div class="division2"></div>-->
+				<p>Grupo X:<p>					
+				Integrantes:
+				<div class="tabla2">
+				<table class="table">		
+					<tbody>
+						<tr>
+						<td>Pedro Díaz-Vaz</td>
+						</tr>
+						<tr>
+						<td>Juan Araneda</td>
+						</tr>
+						<tr>
+						<td>Diego Díaz</td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+			</div>
+	
+		</div>
+
+	</div>
+	
+
+<footer Align="Left">
+	<a href="/" class="btn btn-primary">Volver</a>
+</footer>
+
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block title %}
+	Asignatura: Introduccion a la Programacion
+{% endblock %}
+
+
+{% block content %}
+	Codigo: INFO 013
+	Semestre: I
+	Año: 2012
+	Nombre: Introducción a la Programación
+	<div>
+		<ul class="nav nav-tabs" >
+				<li > <a href="#">Inicio</a></li>			
+				<li> <a href="#">Crear Formulario</a></li>				
+				<li class="active" > <a href="{% url vista_subjects %}">Ver Asignaturas*</a></li>
+				<li> <a href="{% url vista_account %}">Gestionar Cuenta*</a></li>
+				<li> 
+					<a Align="Right" href="{% url vista_logout %}">Cerrar Sesion</a>
+				    
+				</li>		
+				
+		</ul>
+	</div>
+
+	<div class="principal">
+		<div class="menu-vertical">
+			<ul class="nav nav-tabs nav-stacked span3">
+				<li> <a href="#">Ver Evaluaciones Anteriores</a></li>
+				<li class="active"> <a href="#">Realizar Evaluación</a></li>
+				<li> <a href="#">Agregar Alumnos</a></li>		
+				
+			</ul>
+		</div>
+	
+		<div class="contenedor-principal">
+			<a href="/" class="btn btn-primary">Cargar Ultima Configuración</a>
+			<a href="#" class="btn btn-primary">Nueva Distribución</a>
+			<br>
+			<div class="sub-contenedor1">
+				<div class="contenedor-alumnos-sin-grupo">
+				<p> Alumnos sin grupos </p>		
+				<table class="table table-striped span1">		
+				<tbody>
+					<tr>
+					<td>Andres Contreras</td>
+					</tr>
+					<tr>
+					<td>Francisca Delgado</td>
+					</tr>
+					<tr>
+					<td>Diego Gutierrez</td>
+					</tr>
+				</tbody>
+				</table>		
+				</div>
+				<div class="contenedor-botones">
+					
+					<a href="{% url vista_agregar_alumno1 %}" class="btn">Agregar Alumno</a>	
+					<button type="submit" class="btn btn-primary">Guardar Distribución</button>
+					<button type="submit" class="btn btn-primary">Continuar</button>
+					
+				</div>
+
+			</div>
+
+			<div class="sub-contenedor2">
+				<div class="contenedor-grupos">
+					<div class="contenedor-tabla-grupos">
+					<table class="table table-striped span2">		
+					<tbody>
+						<tr>
+						<td>Grupo 1</td>
+						</tr>
+						<tr>
+						<td>Grupo 2</td>
+						</tr>
+						<tr>
+						<td>Grupo 3</td>
+						</tr>
+					</tbody>					
+					</table>
+					</div>
+					<div class="botones-contenedor-grupos">
+						<p>
+						<button type="submit" class="btn btn-success">Crear Grupo</button>
+						</p>
+						<p>
+						<button type="submit" class="btn btn-warning">Eliminar Grupo</button>
+						</p>
+					</div>
+				</div>
+				<div class="contenedor-alumnos-asignados">
+					<div class="contenedor-tabla-alumnos-asignados">
+						<p>Grupo X:<p>					
+						Integrantes:
+						<table class="table table-striped span2">		
+							<tbody>
+								<tr>
+								<td>Pedro Díaz-Vaz</td>
+								</tr>
+								<tr>
+								<td>Juan Araneda</td>
+								</tr>
+								<tr>
+								<td>Diego Díaz</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+	
+		</div>
+
+	</div>
+	
+
+<footer Align="Left">
+	<a href="/" class="btn btn-primary">Volver</a>
+</footer>
+
+{% endblock %}
