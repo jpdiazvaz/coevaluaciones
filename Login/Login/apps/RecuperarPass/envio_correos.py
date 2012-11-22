@@ -24,7 +24,7 @@ ip = csv.reader(open(sys.argv[1], "rb"), delimiter=" ")
 # conecta con servidor de correo (sólo lo he probado con correos basados en gmail)
 print "conectando con servidor de correo..."
 username = 'drigox90rih@gmail.com'
-password = 'zaidogir1990z'
+password = ''
 server = smtplib.SMTP('smtp.gmail.com:587')
 server.starttls()
 server.login(username,password)

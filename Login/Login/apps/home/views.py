@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
 #from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
+import random
 
 def index_view(request):
 	mensaje = ""
@@ -49,12 +50,26 @@ def recover_view(request):
 		if mailForm.is_valid():
 			info_enviado = True
 			email = mailForm.cleaned_data['Email']			
-			texto = "Hola. Esta es la recuperacion de contrasegna Por defecto su contrasegna ha sido seteada a la misma que su nombre de usuario. Se ruega cambiar su contrasegna una vez ingresado al sistema."			
-			html_content = "%s<br><br><br> **No reenviar a este correo*<br>"%(texto)
+			texto = ""			
+			
+
+			
+			""" actualizar password"""
+			#usr=User();
+			user=User.objects.get(email__exact=email)	
+			ps1=random.randint(100,1000)
+			ps2=random.randint(100,1000)
+			ps3=random.randint(100,1000)
+			pwd=str(ps1)+str(ps2)+str(ps3)
+			user.set_password(pwd)
+			#user=User(user.password=user.username);
+			#user=auth_user(user.id,user.username,user.password)
+			user.save()
+			html_content = "Hola. Esta es la recuperacion de contrasegna. Se ruega cambiar su contrasegna una vez ingresado al sistema. <br> Su nueva contrasegna es :%s <br><br><br> *No reenviar a este correo*<br>"%(pwd)
 			msg = EmailMultiAlternatives('Recuperacion Contrasegna',html_content,'from@server.com',[email])
 			msg.attach_alternative(html_content,'text/html')
+			ctx = {'form':mailForm, 'email':email,'info_enviado':info_enviado,'pass':pwd}
 			msg.send()
-			ctx = {'form':mailForm, 'email':email,'info_enviado':info_enviado}
 			return render_to_response('home/recuperar_pass.html',ctx,context_instance=RequestContext(request))
 		else:			
 			info_enviado=False
