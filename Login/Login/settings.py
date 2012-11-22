@@ -156,6 +156,6 @@ LOGGING = {
 
 EMAIL_HOST ='smtp.gmail.com'
 EMAIL_PORT ='587'
-EMAIL_HOST_USER = 'el.diegui@gmail.com'
-EMAIL_HOST_PASSWORD = '17200367-2'
+EMAIL_HOST_USER = 'xevaluacion@gmail.com'
+EMAIL_HOST_PASSWORD = 'djangoev2012'
 EMAIL_USE_TLS = True

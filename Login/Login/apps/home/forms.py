@@ -5,4 +5,5 @@ class LoginForm(forms.Form):
 	password	= forms.CharField(widget = forms.PasswordInput(render_value=False))
 
 class RecoveryForm(forms.Form):
-	mail	= forms.CharField(widget = forms.TextInput())
+	Email	= forms.CharField(widget = forms.TextInput())
+
