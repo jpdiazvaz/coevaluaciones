@@ -6,6 +6,7 @@ from django.db import models
 from Login.apps.home.forms import LoginForm, RecoveryForm
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
+from django.contrib.auth.decorators import login_required
 
 def index_view(request):
 	mensaje = ""
@@ -31,26 +32,34 @@ def logout_view(request):
 	logout(request)
 	return HttpResponseRedirect('/')
 
-def profesor_view(request):
-	return render_to_response('home/profesor_login.html', ctx, context_instance=RequestContext(request))
+@login_required(redirect_field_name='/')
+def profesor_view(request):	
+	return render_to_response('home/profesor_login.html', context_instance=RequestContext(request))
 
+@login_required(redirect_field_name='/')
 def recover_view(request):
 	return render_to_response('home/recuperar_pass.html', context_instance=RequestContext(request))
 
+@login_required(redirect_field_name='/')
 def account_view(request):
 	return render_to_response('home/gestionar_cuenta.html', context_instance=RequestContext(request))
 
+@login_required(redirect_field_name='/')
 def subjects_view(request):
 	return render_to_response('home/ver_asignaturas.html', context_instance=RequestContext(request))
 
+@login_required(redirect_field_name='/')
 def subject1_view(request):
 	return render_to_response('home/asignatura1.html', context_instance=RequestContext(request))
 
+@login_required(redirect_field_name='/')
 def evaluation1_view(request):
 	return render_to_response('home/evaluation1.html', context_instance=RequestContext(request))
 
+@login_required(redirect_field_name='/')
 def distribution1_view(request):
 	return render_to_response('home/distribution1.html', context_instance=RequestContext(request))
 
+@login_required(redirect_field_name='/')
 def add_student1_view(request):
 	return render_to_response('home/buscar_alumno.html', context_instance=RequestContext(request))

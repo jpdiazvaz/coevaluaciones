@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import patterns, url
 
 urlpatterns = patterns('Login.apps.home.views',
+	#url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
 	url(r'^$', 'index_view', name='vista_principal'),
 	url(r'^logout/$', 'logout_view', name='vista_logout'),
 	url(r'^profesor_login/$', 'profesor_view', name='vista_profesor'),

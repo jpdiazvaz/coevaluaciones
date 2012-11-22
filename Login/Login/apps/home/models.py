@@ -20,12 +20,18 @@ class userProfile(models.Model):
     apellido    = models.CharField(max_length=50)
     photo       = models.ImageField(upload_to=url)
     email       = models.CharField(max_length=50)
-
+     # Other fields here
+    accepted_eula = models.BooleanField()
+    favorite_animal = models.CharField(max_length=20, default="Dragons.")    
 
 
     def __unicode__(self):
         return self.user.username
-
+    def validarEmail(em):
+        if em == self.email:
+            return True
+        else:
+            return False
 
 
 #1ero
