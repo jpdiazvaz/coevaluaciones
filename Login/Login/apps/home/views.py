@@ -75,7 +75,7 @@ def recover_view(request):
 					if (a==2): #caso para crear caracteres minusculas
 						c=random.randint(0,25)+97					
 					pwd=pwd+str(unichr(c))
-				pwd="asdf"
+				
 				user.set_password(pwd)
 				user.save()
 				html_content = "Hola. Esto es la recuperacion de contrasegna. Se ruega cambiar su contrasegna una vez ingresado al sistema. <br> Su nueva contrasegna es :%s <br><br><br> *No reenviar a este correo*<br>"%(pwd)
