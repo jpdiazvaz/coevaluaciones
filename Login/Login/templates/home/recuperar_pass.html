@@ -6,19 +6,24 @@
 	<DIV Align=Center>
 		<h2> Recuperar Contraseña </h2>
 		{% if info_enviado %}
-			Información enviada al correo destino {{email}} <br>
-			Mi pass es: {{pwd}}
+			Información enviada al correo destino {{ email }} 
+			<br><br>
+			<a href="{% url vista_principal %}" type="button" class="btn btn-primary">Volver</a>
 		{% else %}
 			<p> Ingrese su dirección de correo electrónico para enviarle la información necesaria para recuperar su contraseña </p>
 
+			{% if not mail_existe %}
+				<p> Correo no existe, ingrese uno válido. </p>
+			{% endif %}	
+
 			<form action="." method="POST">
-				{% csrf_token %}
-				Correo Electrónico: 
-				<input type="text" name ="Email" placeholder="Escriba su correo aquí..."/>				
+				{% csrf_token %}	
+				<input type="text" name ="Email" placeholder="Escriba su correo aquí..."/>		
 				<button type="submit" style="margin-bottom:9px" class="btn btn-warning" > 
 					Reestablecer Contraseña
 				</button>
 			</form>
+
 		{% endif %}
 	</DIV>
 {% endblock %}

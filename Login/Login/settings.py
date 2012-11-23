@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'Login.apps.home',
+    #'bootstrap',
 )
 
 AUTH_PROFILE_MODULE = 'home.userProfile',
