@@ -88,57 +88,18 @@ $(function () {
 				<p> Alumnos sin grupos: </p>
 				<!--<div class="division1"></div>-->
 				<div id="tabla1">
-					<table class="table">		
-					<tbody>
+					<table class="table">
+					<thead><tr>
+						<td> <strong> ID  </strong></td>
+						<td> <strong> Nombre </strong></td>
+						</tr></thead>		
+					<tbody>						
+						{% for x in usr %}
 						<tr>
-						<td>Andres Contreras</td>
+						<td> {{ x.id }}</td>
+						<td> {{ x.username }}</td>
 						</tr>
-						<tr>
-						<td>Francisca Delgado</td>
-						</tr>
-						<tr>
-						<td>Diego Gutierrez</td>
-						</tr>
-						<tr>
-						<td>Andres Contreras</td>
-						</tr>
-					    <tr>
-						<td>Andres Contreras</td>
-						</tr>
-						<tr>
-						<td>Andres Contreras</td>
-						</tr>
-						<tr>
-						<td>Andres Contreras</td>
-						</tr>
-						<tr>
-						<td>Andres Contreras</td>
-						</tr>
-						<tr>
-						<td>Andres Contreras</td>
-						</tr>
-						<tr>
-						<td>Andres Contreras</td>
-						</tr>
-						<tr>
-						<td>Andres Contreras</td>
-						</tr>
-						<tr>
-						<td>Andres Contreras</td>
-						</tr>
-						<tr>
-						<td>Andres Contreras</td>
-						</tr>
-						<tr>
-						<td>Andres Contreras</td>
-						</tr>
-						<tr>
-						<td>Andres Contreras</td>
-						</tr>
-						<tr>
-						<td>Andres Contreras</td>
-						</tr>
-					
+						{% endfor %}
 
 					</tbody>
 					</table>		
@@ -169,21 +130,11 @@ $(function () {
 				<div class="tabla2">
 				<table class="table">		
 				<tbody>
+					{% for i in range %}
 					<tr>
-					<td>Grupo 1</td>
+					<td>Grupo {{ i }}</td>
 					</tr>
-					<tr>
-					<td>Grupo 2</td>
-					</tr>
-					<tr>
-					<td>Grupo 3</td>
-					</tr>
-					<tr>
-					<td>Grupo 4</td>
-					</tr>										
-					<tr>
-					<td>Grupo 5</td>
-					</tr>
+					{% endfor %}
 				</tbody>					
 				</table>
 				</div>

@@ -6,11 +6,11 @@ from django.http import HttpResponseRedirect
 from django.db import models
 from Login.apps.home.forms import LoginForm, RecoveryForm, AccountForm
 from django.contrib.auth.models import User
-from django.core.mail import EmailMultiAlternatives, send_mail
-#from django.core.mail import send_mail
+from Login.apps.home.models import Alumno
+from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.decorators import login_required
 import random
-
+#k.klingenberg@gmail.com
 def index_view(request):
 	mensaje = ""
 	if request.user.is_authenticated():
@@ -81,8 +81,7 @@ def recover_view(request):
 				html_content = "Hola. Esto es la recuperacion de contrasegna. Se ruega cambiar su contrasegna una vez ingresado al sistema. <br> Su nueva contrasegna es :%s <br><br><br> *No reenviar a este correo*<br>"%(pwd)
 				msg = EmailMultiAlternatives('Recuperacion Contrasegna',html_content,'from@server.com',[email])
 				msg.attach_alternative(html_content,'text/html')
-				ctx = {'form':mailForm, 'email':email,'info_enviado':info_enviado,'pass':pwd,'mail_existe':mail_existe}
-				#send_mail('Recuperacion de Contrasenha',html_content,'from@server.com',[email],fail_silently=False)
+				ctx = {'form':mailForm, 'email':email,'info_enviado':info_enviado,'pass':pwd,'mail_existe':mail_existe}				
 				msg.send()
 				return render_to_response('home/recuperar_pass.html',ctx,context_instance=RequestContext(request))
 			else:
@@ -103,7 +102,7 @@ def recover_view(request):
 @login_required(redirect_field_name='/ingresar')
 def account_view(request):
 	email = ""	
-	texto = "hola"
+	texto = ""
 	if request.method == "POST":
 		accForm = AccountForm(request.POST)
 		
@@ -152,7 +151,12 @@ def account_view(request):
 
 @login_required(redirect_field_name='/ingresar')
 def subjects_view(request):
-	return render_to_response('home/ver_asignaturas.html', context_instance=RequestContext(request))
+	#usr = Alumno(rut="44444444-4", nombre="Flan3", email="adsf@asdf.com", password="qwerty2")
+	#print(alum)
+	#alum=alumno.objects.create(id_alumno=1,rut='8093585-4',nombre='Luis Diaz',email='luisediazt.58@gmail.com','8093585')
+	#usr.save()
+	ctx = '' #{'alumno': usr}
+	return render_to_response('home/ver_asignaturas.html',ctx ,context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/ingresar')
 def subject1_view(request):
@@ -164,7 +168,9 @@ def evaluation1_view(request):
 
 @login_required(redirect_field_name='/ingresar')
 def distribution1_view(request):
-	return render_to_response('home/distribution1.html', context_instance=RequestContext(request))
+	usr = User.objects.all()
+	ctx = {'usr': usr, 'range':range(9)}
+	return render_to_response('home/distribution1.html', ctx, context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/ingresar')
 def add_student1_view(request):

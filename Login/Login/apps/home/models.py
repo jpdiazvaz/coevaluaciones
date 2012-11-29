@@ -45,12 +45,19 @@ class InstanciaRamo(models.Model):
 #3ro
 class Alumno(models.Model):
     id_alumno = models.IntegerField(primary_key=True)
+    #id_alumno = models.OneToOneField(User,primary_key=True,db_column='id')
     rut = models.CharField(max_length=30, unique=True, db_column='RUT') # Field name made lowercase.
     nombre = models.CharField(max_length=300)
     email = models.CharField(max_length=150)
     password = models.CharField(max_length=60)
     class Meta:
         db_table = u'alumno'
+    
+    def __unicode__(self):
+        return u"rut: {0}; nombre: {1}".format(self.rut, self.nombre)
+
+
+
 #4to
 class Inscripcion(models.Model):
     id_instancia_ramo = models.ForeignKey(InstanciaRamo, db_column='id_instancia_ramo')

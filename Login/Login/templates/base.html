@@ -8,7 +8,7 @@
 	{% block js %}
 	<script type="text/javascript" src="/media/css/prefix-free.js"></script>
 	<script type="text/javascript">
-	$("tr").click(function(){
+	/*$("tr").click(function(){
 		$(this).slideUp();
 
 	});
@@ -20,9 +20,22 @@
 		};
 	}
 	alert("hola");
-
+	*/
 	</script>
+	<script type="text/javascript">
+	window.onload = function() {
+		var theRows = document.getElementsByTagName("tr");
+		for (i in theRows) {
+			i.onclick = function() {
+				highlight(this);
+			}
+		}
+	}
 
+ 	$("tr").click(function(){
+ 		$(this).toggleClass("otherstyle");
+	}
+</script>
 	{% endblock %}
 	{% block css %}
 		<link rel="stylesheet" href="/media/css/bootstrap.css">
@@ -55,6 +68,20 @@
 	</header>
 	<section>
 		{% block content %}
+		<table class="spreadsheet">
+		<tr>
+		<td>1</td>
+		<td>2</td>
+		</tr>
+		<tr>
+		<td>3</td>
+		<td>4</td>
+		</tr>
+		<tr>
+		<td>5</td>
+		<td>6</td>
+		</tr>
+		</table>
 		{% endblock %}
 	</section>
 </html>
