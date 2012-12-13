@@ -1,0 +1,73 @@
+{% extends "evaluaciones/base.html" %}
+
+{% load more_tags %}
+
+{% block stylesheets %}
+
+<link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" media="screen">
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+{% include "messages.html" %}
+
+<!-- crear evaluacion -->
+
+<div class="row">
+  <div class="span8">
+
+{% include "search.html" %}
+
+  </div>
+  <div class="span4">
+
+{% include "pagination.html" %}
+
+  </div>
+</div>
+
+
+<table class="table table-condensed">
+  <caption>
+{% if evaluaciones %}
+Mostrando elementos {{ first }}-{{ last }}.
+{% else %}
+No hay evaluaciones en edición.
+{% endif %}
+  </caption>
+  <thead>
+    <tr>
+      <th style="width: 5%;">#</th>
+      <th style="width: 23%;">Nombre</th>
+      <th style="width: 13%;">Autor</th>
+      <th style="width: 25%;">Palabras clave</th>
+      <th style="width: 12%;">Fecha</th>
+      <th style="width: 22%;"></th>
+    </tr>
+  </thead>
+  <tbody>
+{% for e in evaluaciones %}
+{% cycle '' 'background-color: #F9F9F9' as rowstyles silent %}
+<tr style="{{ rowstyles }}">
+  <td>{{ forloop.counter0|add:first }}</td>
+  <td title="{{ e.descripcion }}"><div class="cell">{{ e.descripcion }}</div></td>
+  <td title="{{ e.autor }}"><div class="cell">{{ e.autor }}</div></td>
+  <td title="{{ e.KEYWORDS }}"><div class="cell">{{ e.KEYWORDS }}</div></td>
+  <td title="{{ e.fecha_creacion|date:"d/m/Y" }}">{{ e.fecha_creacion|date:"d/m/Y" }}</td>
+  <td>
+  </td>
+</tr>
+{% endfor %}
+  </tbody>
+</table>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // dismiss alerts
+    $(".alert").alert();
+});
+</script>
+{% endblock scripts %}

@@ -1,0 +1,6 @@
+{# requiere parámetros total_pages y current_page #}
+<div class="pagination pagination-centered">
+  <ul>
+    <li{% if current_page == 1 %} class="disabled"{% endif %}><a href="{{ request.path }}"><i class="icon-chevron-left"></i></a></li>
+  </ul>
+</div>

@@ -1,0 +1,80 @@
+{% extends "formularios/base.html" %}
+
+{% load more_tags %}
+
+{% block stylesheets %}
+
+<link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" media="screen">
+
+{% endblock stylesheets %}
+
+{% block title %}Buscar formularios ya publicados{% endblock %}
+
+{% block tab_buscar %}active{% endblock %}
+
+{% block formularios_body %}
+
+{% include "messages.html" %}
+
+<div class="row">
+  <div class="span8">
+
+{% include "search.html" %}
+
+  </div>
+  <div class="span4">
+
+{% include "pagination.html" %}
+
+  </div>
+</div>
+
+
+
+<table class="table table-condensed">
+  <caption>
+{% if formularios %}
+Mostrando elementos {{ first }}-{{ last }}.
+{% else %}
+No hay formularios publicados.
+{% endif %}
+  </caption>
+  <thead>
+    <tr>
+      <th style="width: 5%;">#</th>
+      <th style="width: 23%;">Nombre</th>
+      <th style="width: 13%;">Autor</th>
+      <th style="width: 25%;">Palabras clave</th>
+      <th style="width: 12%;">Fecha</th>
+      <th style="width: 22%;"></th>
+    </tr>
+  </thead>
+  <tbody>
+{% for f in formularios %}
+{% cycle '' 'background-color: #F9F9F9' as rowstyles silent %}
+<tr style="{{ rowstyles }}">
+  <td>{{ forloop.counter0|add:first }}</td>
+  <td title="{{ f.descripcion }}"><div class="cell">{{ f.descripcion }}</div></td>
+  <td title="{{ f.autor }}"><div class="cell">{{ f.autor }}</div></td>
+  <td title="{{ f.KEYWORDS }}"><div class="cell">{{ f.KEYWORDS }}</div></td>
+  <td title="{{ f.fecha_creacion|date:"d/m/Y" }}">{{ f.fecha_creacion|date:"d/m/Y" }}</td>
+  <td>
+    <button class="btn btn-mini btn-info" type="button">+info</button>
+    <button class="btn btn-mini btn-info" type="button">ver</button>
+    <a class="btn btn-mini btn-primary" title="Crea una copia no publicada de este formulario. La copia puede ser editada." href="{% url app_evals.formularios.views.copiar f.pk %}">copiar</a>
+  </td>
+</tr>
+{% endfor %}
+  </tbody>
+</table>
+
+{% endblock formularios_body %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // dismiss alerts
+    $(".alert").alert();
+});
+</script>
+{% endblock scripts %}

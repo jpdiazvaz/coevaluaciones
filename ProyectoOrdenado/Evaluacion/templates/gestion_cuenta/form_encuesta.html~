@@ -1,0 +1,36 @@
+{# form_encuesta requiere variable form_encuesta #}
+{% for err in form_encuesta.non_field_errors %}
+<p class="text-error">{{ err }}</p>
+{% endfor %}
+
+<div class="control-group {% if form_encuesta.descripcion.errors %}error{% endif %}">
+  <label class="control-label" for="{{ form_encuesta.descripcion.name }}_id">{{ form_encuesta.descripcion.label }}:</label>
+  <div class="controls">
+    <input type="text" id="{{ form_encuesta.descripcion.name }}_id" name="{{ form_encuesta.descripcion.name }}" class="input-xlarge" value="{% if form_encuesta.descripcion.value %}{{ form_encuesta.descripcion.value }}{% endif %}">
+    {% for err in form_encuesta.descripcion.errors %}
+    <span class="help-block">{{ err }}</span>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="control-group {% if form_encuesta.ecoevaluacion.errors %}error{% endif %}">
+  <div class="controls">
+    <label class="checkbox">
+      <input type="checkbox" id="{{ form_encuesta.ecoevaluacion.name }}_id" name="{{ form_encuesta.ecoevaluacion.name }}" {% if form_encuesta.ecoevaluacion.value %}checked{% endif %}>
+      es eco-evaluación
+    </label>
+    {% for err in form_encuesta.ecoevaluacion.errors %}
+    <span class="help-block">{{ err }}</span>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="control-group {% if form_encuesta.METADATA.errors %}error{% endif %}">
+  <label class="control-label" for="{{ form_encuesta.METADATA.name }}_id">{{ form_encuesta.METADATA.label }}:</label>
+  <div class="controls">
+    <textarea id="{{ form_encuesta.METADATA.name }}_id" name="{{ form_encuesta.METADATA.name }}">{% if form_encuesta.METADATA.value %}{{ form_encuesta.METADATA.value }}{% endif %}</textarea>
+    {% for err in form_encuesta.METADATA.errors %}
+    <span class="help-block">{{ err }}</span>
+    {% endfor %}
+  </div>
+</div>

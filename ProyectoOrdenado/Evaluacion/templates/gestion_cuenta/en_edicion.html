@@ -1,0 +1,125 @@
+{% extends "formularios/base.html" %}
+
+{% load more_tags %}
+
+{% block stylesheets %}
+
+<link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" media="screen">
+
+{% endblock stylesheets %}
+
+{% block title %}Formularios en edición{% endblock %}
+
+{% block tab_en_edicion %}active{% endblock %}
+
+{% block formularios_body %}
+
+{% include "messages.html" %}
+
+<div class="row">
+  <div class="span8">
+
+    <a href="{% url app_evals.formularios.views.agregar %}" class="btn">
+      <i class="icon-plus"></i> Agregar formulario</a>
+
+  </div>
+
+  <div class="span4">
+    {% include "pagination.html" %}
+  </div>
+
+</div>
+
+<!-- Confirmar eliminación -->
+<div id="eliminar-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="modalLabel">¿Seguro que quiere eliminar el formulario?</h3>
+  </div>
+  <div class="modal-body">
+    <p>Si elimina el formulario perderá todas las preguntas y alternativas que ingresó.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+    <a id="eliminar-action" href="#" class="btn btn-danger">Si, borrar</a>
+  </div>
+</div>
+
+<!-- Confirmar publicación -->
+<div id="publicar-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="modalLabel">¿Seguro que quiere publicar el formulario?</h3>
+  </div>
+  <div class="modal-body">
+    <p>El formulario no podrá ser editado y estará disponible para todos los profesores.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+    <a id="publicar-action" href="#" class="btn btn-success">Publicar</a>
+  </div>
+</div>
+
+<table class="table table-condensed">
+  <caption>
+{% if formularios %}
+Mostrando elementos {{ first }}-{{ last }}.
+{% else %}
+No hay formularios en edición.
+{% endif %}
+  </caption>
+  <thead>
+    <tr>
+      <th style="width: 5%;">#</th>
+      <th style="width: 23%;">Nombre</th>
+      <th style="width: 13%;">Autor</th>
+      <th style="width: 25%;">Palabras clave</th>
+      <th style="width: 12%;">Fecha</th>
+      <th style="width: 22%;"></th>
+    </tr>
+  </thead>
+  <tbody>
+{% for f in formularios %}
+{% cycle '' 'background-color: #F9F9F9' as rowstyles silent %}
+<tr style="{{ rowstyles }}">
+  <td>{{ forloop.counter0|add:first }}</td>
+  <td title="{{ f.descripcion }}"><div class="cell">{{ f.descripcion }}</div></td>
+  <td title="{{ f.autor }}"><div class="cell">{{ f.autor }}</div></td>
+  <td title="{{ f.KEYWORDS }}"><div class="cell">{{ f.KEYWORDS }}</div></td>
+  <td title="{{ f.fecha_creacion|date:"d/m/Y" }}">{{ f.fecha_creacion|date:"d/m/Y" }}</td>
+  <td>
+    <a class="btn btn-mini" title="Modificar el formulario" href="{% url app_evals.formularios.views.modificar f.pk %}">
+      <i class="icon-edit"></i>
+    </a>
+    <a class="btn btn-mini btn-danger eliminar" title="Eliminar el formulario" href="{% url app_evals.formularios.views.eliminar f.pk %}">
+      <i class="icon-remove icon-white"></i>
+    </a>
+    <a class="btn btn-mini btn-success publicar" title="Publicar el formulario" href="{% url app_evals.formularios.views.publicar f.pk %}">
+      <i class="icon-ok icon-white"></i>
+    </a>
+  </td>
+</tr>
+{% endfor %}
+  </tbody>
+</table>
+{% endblock formularios_body %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // dismiss alerts
+    $(".alert").alert();
+    // set button events
+    $(".eliminar").click(function(e) {
+        $('#eliminar-action').attr('href', $(e.currentTarget).attr('href'));
+        $('#eliminar-modal').modal({});
+        e.preventDefault();
+    });
+    $(".publicar").click(function(e) {
+        $('#publicar-action').attr('href', $(e.currentTarget).attr('href'));
+        $('#publicar-modal').modal({});
+        e.preventDefault();
+    });
+});
+</script>
+{% endblock scripts %}

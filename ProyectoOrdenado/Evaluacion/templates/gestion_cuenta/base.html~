@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Formularios{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#">Publicados</a></li>
+  <li><a href="{% url formularios.views.publicados %}">En edición</a></li>
+</ul>
+{% endblock content %}

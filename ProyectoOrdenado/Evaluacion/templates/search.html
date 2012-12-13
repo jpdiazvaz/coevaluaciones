@@ -1,0 +1,6 @@
+<form action="{{ request.path }}" class="form-search" method="get">
+  <div class="input-append">
+    <input type="text" name="q" class="search-query" placeholder="Ingrese texto" {% if search_string %}value="{{ search_string }}"{% endif %}>
+    <button type="submit" class="btn">Buscar</button>
+  </div>
+</form>

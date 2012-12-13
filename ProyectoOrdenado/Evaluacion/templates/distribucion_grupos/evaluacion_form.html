@@ -1,0 +1,31 @@
+<form action="{{ request.path }}" method="post">{% csrf_token %}
+  {% for err in form.non_field_errors %}
+  <p class="text-error">{{ err }}</p>
+  {% endfor %}
+
+  {% for field in form %}
+  <div class="control-group {% if field.errors %}error{% endif %}">
+    <label class="control-label">{{ field.label }}:</label>
+    <div class="controls">
+      <div class="input-append">
+	<span id="{{ field.name }}_name" class="input-medium uneditable-input">&lt;vacío&gt;</span>
+	{{ field }}
+        <button type="button" class="btn" onclick="clearfield('{{ field.name }}')"><i class="icon-remove"></i></button>
+	<button type="button" class="btn btn-info">ver</button>
+      </div>
+      {% for err in field.errors %}
+      <span class="help-block">{{ err }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+  <div class="form-action">
+    <button type="submit" class="btn btn-primary btn-large">Crear evaluación</button>
+  </div>
+</form>
+<script>
+var clearfield = function(field) {
+    $('#id_'+field).val('');
+    $('#'+field+'_name').text("<vacío>");
+};
+</script>

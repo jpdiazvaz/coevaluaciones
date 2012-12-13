@@ -1,20 +1,10 @@
 {% extends 'base.html' %}
+{% block nav1_active %}active{% endblock %}
 {% block title %}
 	Bienvenido Profesor
 {% endblock %}
 {% block content %}
 
-<div class="logout"><a Align="Right" href="{% url vista_logout %}">Cerrar Sesion</a></div>
-<div class = "menu_principal">
-<ul class="nav nav-pills" >
-			<li class="active" > <a href="{% url vista_principal %}">Estado Actual</a></li>	
-			<li> <a href="#">Formularios</a></li>				
-			<li > <a href="{% url vista_evaluation1 %}">Evaluaciones</a></li>
-			<li> <a href="{% url vista_account %}">Mi Cuenta</a></li>
-		
-			
-</ul>
-</div>	
 
 <div class = "display">
 	<div class="texto">

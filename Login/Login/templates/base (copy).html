@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8"/>
+	<title>
+		{% block title %} Titulo Base {% endblock %}
+	</title>
+	{% block js %}	
+	<script type="text/javascript" src="/media/js/prefix-free.js"></script>
+	
+	{% endblock %}
+	{% block css %}
+		<link rel="stylesheet" href="/media/css/bootstrap.css">
+		<link rel="stylesheet" href="/media/css/estilo.css">
+	{% endblock %}
+</head>
+<body>
+	<header>
+		<nav>
+			<DIV Align="Center">
+			<!--<a href="{% url vista_principal %}">
+			 <img src="/media/img/escudo_titulo.jpg"/> </a> -->
+			
+
+
+			</DIV>
+			{% if user.is_authenticated %}
+				<div Align="Center">
+					<h4> Bienvenid@ {{ user.first_name }} {{ user.last_name }} </h4>
+				</div>	
+		
+		
+
+<!--				<DIV style="text-align:right; margin-right: 12px">
+					
+					<a href="{% url vista_logout %}"> Cerrar Sesion </a>
+				</DIV> -->
+			{% endif %}
+		</nav>
+	</header>
+	<section>
+		{% block content %}
+		
+		{% endblock %}
+	</section>
+</html>

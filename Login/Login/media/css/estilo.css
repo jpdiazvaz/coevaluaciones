@@ -68,10 +68,10 @@
 	/*transition:all 0.5s ease-in;
 	translateX(10px);*/
 	display: inline-block;
-	margin-left: 5%;
+	margin-left: 0%;
 	min-height: 610px;	
 	vertical-align: top;
-	width: 50%;
+	width: 54%;
 
 	-webkit-transition:all 0.5s ease-in;
 	
@@ -79,10 +79,10 @@
 .sub-contenedor2{
 	
 	display: inline-block;
-	margin-right: 1%;
+	margin-right: 0%;
 	min-height: 610px;
 	vertical-align: top;
-	width: 38%;
+	width: 45%;
 	
 }
 
@@ -169,7 +169,7 @@ td{
 	margin: 3% 0% 0% 3%;
 	overflow: auto;
 	padding: 1em 1em;	
-	width:65%;
+	width:60%;
 
 }
 .tabla_grupos{
@@ -178,7 +178,7 @@ td{
 	margin-left: 3%;
 	overflow: auto;
 	padding: 1em 1em;
-	width:60%;
+	width:55%;
 }
 .tabla_asignados{
 	cursor: pointer;
@@ -269,9 +269,9 @@ form .gestion-cuenta input{
 }
 
 
-/*
+
 div{
 
 	border:1px solid #111fff;
 }
-*/
+

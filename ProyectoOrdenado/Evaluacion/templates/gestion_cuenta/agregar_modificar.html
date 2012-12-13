@@ -1,0 +1,80 @@
+{% extends "formularios/base.html" %}
+
+{% block title %}{% if id %}Modificar{% else %}Agregar{% endif %} formulario{% endblock %}
+
+{% block tabs %}
+{% endblock tabs %}
+
+{% block formularios_body %}
+
+<h4>{% if id %}Modificar{% else %}Agregar{% endif %} formulario</h4>
+
+{% include "messages.html" %}
+
+<form id="nav_form" action="{{ request.path }}" method="post">
+{% csrf_token %}
+
+<div class="pull-right">
+  <a class="btn" href="{% url app_evals.formularios.views.en_edicion %}" title="Cancela los cambios y vuelve a la lista de formularios en edición">Volver</a>
+  <button class="btn btn-primary" type="submit">Guardar y salir</button>
+</div>
+
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#encuesta" data-toggle="tab">Datos encuesta</a></li>
+    <li><a href="#tab-preguntas" data-toggle="tab">Preguntas</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="encuesta">
+
+{% include "formularios/form_encuesta.html" %}
+
+    </div>
+    <div class="tab-pane" id="tab-preguntas">
+      <div id="preguntas">
+{% for form_p in forms_preguntas %}
+
+{% include "formularios/form_pregunta.html" with num_p=forloop.counter form_p=form_p %}
+
+{% endfor %}
+
+{% if not forms_preguntas %}
+
+{% include "formularios/form_pregunta.html" with num_p="1" form_p=empty_question %}
+
+{% endif %}
+      </div>
+
+<button type="button" class="btn btn-primary btn-small" onclick="addQuestion();" title="Agregar pregunta"><i class="icon-plus icon-white"></i> Agregar pregunta</button>
+<input type="hidden" id="total_preguntas" name="total_preguntas" value="{% if forms_preguntas %}{{ forms_preguntas|length }}{% else %}1{% endif %}">
+    </div>
+  </div>
+</div>
+
+</form>
+
+{# una plantilla para agregar más preguntas dinámicamente #}
+<div id="template-pregunta" style="display: none;">
+{% include "formularios/form_pregunta.html" with num_p=0 form_p=empty_question %}
+</div>
+
+{# otra plantilla para opciones #}
+<ul id="template-opcion" style="display: none;">
+{% include "formularios/form_opcion.html" with op=empty_option cont=0 num_p=0 %}
+</ul>
+
+{% endblock formularios_body %}
+
+{% block scripts %}
+<script src="{{ STATIC_URL }}js/formularios.js"></script>
+<script>
+
+$(document).ready(function() {
+    // initial button events
+    setQuestionEvents($('#preguntas'));
+    // trigger select events
+    $('select').change();
+});
+
+</script>
+{% endblock scripts %}
