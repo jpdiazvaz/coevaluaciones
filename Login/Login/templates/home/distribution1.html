@@ -4,170 +4,227 @@
 {% endblock %}
 
 {% block js %}
+<script type="text/javascript" src="/media/js/jquery.js"></script>
+<script type="text/javascript" src="/media/js/deletecreation_groups.js"></script>
+<script type="text/javascript" src="/media/js/selectRows.js"></script>
 <script type="text/javascript">
-	function activar(){
-		var ob=document.getElementById("tabla1");		
-		for (var i = 0; i < ob.childNodes[0].childNodes[0].length; i++) {
-			alert(ob.childNodes[i].childNodes[0].nodeValue);
-		};
-	}
-	
-$(function () {
-
-        $("#btn-continuar").click(function () {
-
-            $("#tabla1 .table tbody tr").each(function (index) {
-
-                var campo1, campo2, campo3;
-                $(this).children("td").each(function (index2) {
-                    switch (index2) {
-                        case 0:
-                            campo1 = $(this).text();
-                          break;
-                      case 1:
-                          campo2 = $(this).text();
-
-                          break;
-                      case 2:
-                          campo3 = $(this).text();
-                          break;
-                  }
-              $(this).css("background-color", "#ECF8E0");
-              });
-          alert(campo1 + ' - ' + campo2 + ' - ' + campo3);
 
 
-          })
+function obtenerDatos(){
+    var ids = [{% for x in usr %}                           
+                "{{ x.id }}",               
+        {% endfor %}];
+    var nombres = [{% for x in usr %}                           
+                "{{ x.username }}",             
+        {% endfor %}];
+};
+/*
+for (var x=0;x<ids.length;x++){
 
- })
-})
+    alert(ids[x] +" - "+nombres[x]);
+};
+    accion(ids,nombres);
+};
 
 
 
+$(document).ready(function() {
+    $("#tabla_sin_grupos tbody tr").click(function(e) {
+        var currentCellText = $(this).children().text();        // dato de la celda
+        alert(currentCellText);
+    });
+
+});
+
+
+function obtenerDatos(){
+	var ids = [{% for x in usr %}							
+				"{{ x.id }}",				
+		{% endfor %}];
+	var nombres = [{% for x in usr %}							
+				"{{ x.username }}",				
+		{% endfor %}];
+
+for (var x=0;x<ids.length;x++){
+
+	alert(ids[x] +" - "+nombres[x]);
+};
+	accion(ids,nombres);
+};*/
 </script>
+
+
+
 
 {% endblock %}
 
 {% block content %}
-	Codigo: INFO 013
+	<!--Codigo: INFO 013
 	Semestre: I
 	Año: 2012
-	Nombre: Introducción a la Programación
-	<div>
-		<ul class="nav nav-tabs" >
-				<li > <a href="#">Inicio</a></li>			
-				<li> <a href="#">Crear Formulario</a></li>				
-				<li class="active" > <a href="{% url vista_subjects %}">Ver Asignaturas*</a></li>
-				<li> <a href="{% url vista_account %}">Gestionar Cuenta*</a></li>
-				<li> 
-					<a Align="Right" href="{% url vista_logout %}">Cerrar Sesion</a>
-				    
-				</li>		
+	Nombre: Introducción a la Programación-->
+	<div class="logout"><a href="{% url vista_logout %}">Cerrar Sesion</a></div>
+	<div class = "navbar navbar-inverse">
+		<div class="navbar-inner">
+			<div class="container">
+			
+				<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</a>
+				 
+				<!-- Be sure to leave the brand out there if you want it shown -->
+				<a class="brand" href="#">Estado Actual</a>
+				<a class="navbar" href="#" name="Formularios">
 				
-		</ul>
+				</a>
+				<a class="brand" href="#">Nueva Evaluacion</a>
+				<a class="brand" href="#">Mi Cuenta</a>
+				 
+
+				 
+			</div>
+		</div>
+		<!--<ul class="nav nav-pills" >
+				<li > <a href="{% url vista_principal %}">Estado Actual</a></li>
+				<li> <a href="#">Formularios</a></li>				
+				<li class="active" > <a href="{% url vista_evaluation1 %}">Evaluaciones</a></li>
+				<li> <a href="{% url vista_account %}">Mi Cuenta</a></li>
+		</ul>	-->
 	</div>
 
-	<div class="principal">
-		<div class="menu-vertical">
-			<ul class="nav nav-tabs nav-stacked span3">
-				<li> <a href="#">Ver Evaluaciones Anteriores</a></li>
-				<li class="active"> <a href="#">Realizar Evaluación</a></li>
-				<li> <a href="#">Agregar Alumnos</a></li>		
-				
-			</ul>
-		</div>
+	
 	
 		<div class="contenedor-principal">
 
-			<p>
-				<a href="/" class="btn btn-primary">Cargar Ultima Configuración</a>
-				<a href="#" class="btn btn-primary">Nueva Distribución</a>
-			<p>			
+			
 			<div class="sub-contenedor1">
+				<div class = "botones0">
+					<p>
+						<a href="#" class="btn btn-primary">Nueva Distribución</a>
+					</p>
+					<p>	
+						<a href="/ingresar" class="btn btn-primary">Cargar Ultima Configuración</a>
+					</p>
+
+					<select>
+					<option>[INFO 125] Taller de Ingenieria</option>
+					<option>[INFO 013] Introduccion a la Programacion</option>
+					<option>...</option>
+					</select>
+					<a href="{% url vista_agregar_alumno1 %}" class="btn btn-success" id="btn-agregar-alumno">Agregar Alumno
+					</a>
+					<p>
+						<strong> Alumnos sin grupos: </strong>
+					</p>					
+				</div>
 				
-				<p> Alumnos sin grupos: </p>
 				<!--<div class="division1"></div>-->
-				<div id="tabla1">
-					<table class="table">
-					<thead><tr>
+				<div class ="botones_asignacion">
+					<div class="boton-verde"><a href="/ingresar"></a></div>
+					<div class="boton-rojo"><a href="/ingresar"></a></div>					
+				</div>	
+				
+				
+				<div id="tabla_singrupos">
+					<table class="table" id="tabla_sin_grupos">
+					<thead>
+						<tr>
 						<td> <strong> ID  </strong></td>
 						<td> <strong> Nombre </strong></td>
-						</tr></thead>		
-					<tbody>						
-						{% for x in usr %}
-						<tr>
-						<td> {{ x.id }}</td>
-						<td> {{ x.username }}</td>
 						</tr>
+					</thead>		
+					<tbody>	
+					
+						{% for x in usr %}							
+							<tr>						
+								<td align="justify"  nowrap> {{ x.id }}</td>
+								<td align="justify"  nowrap> {{ x.username }}</td>
+								
+							</tr>
+							
+						
+							
 						{% endfor %}
+						<tr>
+								<td  nowrap> 8 </td>
+								<td  nowrap> Peter Capusotto </td>
+						</tr>
+						<tr>
+								<td  nowrap> 9 </td>
+								<td  nowrap> Juan Pablovish </td>
+						</tr>
 
 					</tbody>
 					</table>		
-				</div>		
-							
-			
-				<div id="botones1">									
-				<a href="{% url vista_agregar_alumno1 %}" class="btn">Agregar Alumno</a>	
-				<button type="submit" class="btn btn-primary">Guardar Distribución</button>
-				<button type="submit" class="btn btn-primary" id="btn-continuar">Continuar</button>
 				</div>
-			
-			
+				
 
+
+			
 			</div>
 
 			<div class="sub-contenedor2">
 				
 				<div id="botones2">
 				<p>
-				<button type="submit" class="btn btn-success">Crear Grupo</button>
+				<button type="submit" class="btn btn-primary" id = "crear_grupo">Crear Grupo</button>
 				</p>
 				<p>
-				<button type="submit" class="btn btn-warning">Eliminar Grupo</button>
+				<button type="submit" class="btn btn-danger" id = "borrar_grupo">Eliminar Grupo</button>
 				</p>
-				</div>
-
-				<div class="tabla2">
-				<table class="table">		
+				</div>					
+				
+				<div class="tabla_grupos">				
+				<table class="table" id="tabla_de_grupos">
+				<thead>
+					<tr><td><strong>Grupos asignados</strong></td></tr>
+				</thead>						
 				<tbody>
-					{% for i in range %}
-					<tr>
-					<td>Grupo {{ i }}</td>
-					</tr>
-					{% endfor %}
 				</tbody>					
 				</table>
 				</div>
 
 				
 
-				<!--<div class="division2"></div>-->
-				<p>Grupo X:<p>					
-				Integrantes:
-				<div class="tabla2">
-				<table class="table">		
-					<tbody>
+				<div class="division2"></div>
+				<p id="grupo"></p>
+				
+				<div class="tabla_asignados">
+				<table class="table" id="tabla_grupos_asignados">					
+					<thead>
 						<tr>
-						<td>Pedro Díaz-Vaz</td>
+						<td> <strong> ID  </strong></td>
+						<td> <strong> Nombre </strong></td>
 						</tr>
-						<tr>
-						<td>Juan Araneda</td>
-						</tr>
-						<tr>
-						<td>Diego Díaz</td>
-						</tr>
+					</thead>		
+					<tbody>						
 					</tbody>
 				</table>
 				</div>
+			
+			
+
 			</div>
 	
+
+		<div id="botones1">									
+			<button type="submit" class="btn btn-primary" id="asignar">Asignar</button>			
+			<form action="." method="GET"><button type="submit" class="btn btn-primary">Guardar Distribución</button></form>		
+			<button type="submit" class="btn btn-primary" id="desasignar">Desasignar</button>			
 		</div>
+	
+	<p id="para" />
 
 	</div>
 	
+	
 
-<footer Align="Left">
-	<a href="/" class="btn btn-primary">Volver</a>
+<footer>
+	
 </footer>
+
 
 {% endblock %}

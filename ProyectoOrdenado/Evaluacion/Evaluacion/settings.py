@@ -1,5 +1,5 @@
-# Django settings for Login project.
-import os
+# Django settings for Evaluacion project.
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -11,10 +11,10 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'evaluacion',                      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'myrootsql',                  # Not used with sqlite3.
+        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -45,12 +45,12 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__),'media/'))
+MEDIA_ROOT = ''
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = '/media/'
+MEDIA_URL = ''
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -78,7 +78,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '5jj*js551fn97(7#pkafb5c*8@^1x=eay_%0w#iw)%%2s^b!2j'
+SECRET_KEY = 'r51!7e9g_a4$%m2cd9+o42j6a+jt!ju%_b@35@@hf(qrp20h7k'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -97,16 +97,15 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'Login.urls'
+ROOT_URLCONF = 'Evaluacion.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'Login.wsgi.application'
+WSGI_APPLICATION = 'Evaluacion.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(os.path.dirname(__file__),'templates'),
 )
 
 INSTALLED_APPS = (
@@ -117,15 +116,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    'django.contrib.admindocs',    
-    'Login.apps.home',
-    #'jsonify',
-    #'bootstrap',
+    # 'django.contrib.admindocs',
 )
-
-AUTH_PROFILE_MODULE = 'home.userProfile',
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -155,9 +149,3 @@ LOGGING = {
         },
     }
 }
-
-EMAIL_HOST ='smtp.gmail.com'
-EMAIL_PORT ='587'
-EMAIL_HOST_USER = 'xevaluacion@gmail.com'
-EMAIL_HOST_PASSWORD = 'djangoev2012'
-EMAIL_USE_TLS = True

@@ -4,17 +4,56 @@
 {% endblock %}
 {% block content %}
 
-<ul class="nav nav-tabs" >
-			<li class="active"> <a href="#">Inicio</a></li>			
-			<li> <a href="#">Crear Formulario</a></li>				
-			<li> <a href="{% url vista_subjects %}">Ver Asignaturas*</a></li>
-			<li> <a href="{% url vista_account %}">Gestionar Cuenta*</a></li>
-			<li> 
-				<a Align="Right" href="{% url vista_logout %}">Cerrar Sesion</a>
-			    
-			</li>		
-				
+<div class="logout"><a Align="Right" href="{% url vista_logout %}">Cerrar Sesion</a></div>
+<div class = "menu_principal">
+<ul class="nav nav-pills" >
+			<li class="active" > <a href="{% url vista_principal %}">Estado Actual</a></li>	
+			<li> <a href="#">Formularios</a></li>				
+			<li > <a href="{% url vista_evaluation1 %}">Evaluaciones</a></li>
+			<li> <a href="{% url vista_account %}">Mi Cuenta</a></li>
+		
+			
 </ul>
+</div>	
+
+<div class = "display">
+	<div class="texto">
+		<p align="center">Evaluaciones Finalizadas</p>
+		<p align="center"><h3>Nombre de Evaluacion</h3></p>
+	</div>
+	<div class="curso">
+		<p align="center">Nombre Curso</p>
+	</div>
+	<div class="accion">
+		<a href="#">Ver Resultados</a>
+	</div>
+</div>
+
+<div class = "display">
+	<div class="texto">
+		<p align="center">Evaluaciones en Curso</p>
+		<p align="center"><h3>Nombre de Evaluacion</h3></p>
+	</div>
+	<div class="curso">
+		<p align="center">Nombre Curso</p>
+	</div>
+	<div class="accion">
+		<a href="#">Ver Resultados Parciales</a>
+	</div>
+</div>
+
+<div class = "display">
+	<div class="texto">
+		<p align="center">Evaluaciones no Lanzadas</p>
+		<p align="center"><h3>Nombre de Evaluacion</h3></p>
+	</div>
+	<div class="curso">
+		<p align="center">Nombre Curso</p>
+	</div>
+	<div class="accion">
+		<a href="#">Editar</a>
+	</div>
+</div>
 
 	
 {% endblock %}

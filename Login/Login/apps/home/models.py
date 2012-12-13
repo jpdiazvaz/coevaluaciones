@@ -9,21 +9,47 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from itertools import cycle
 
-class userProfile(models.Model):
-    def url(self, filename):
-        ruta = "MultimediaData/Users/%s/%s"%(self.user.username, filename)
+#class userProfile(models.Model):
+#    def url(self, filename):
+#        ruta = "MultimediaData/Users/%s/%s"%(self.user.username, filename)
 
-        return ruta
-    user        = models.OneToOneField(User)
-    nombre      = models.CharField(max_length=50)
-    apellido    = models.CharField(max_length=50)
-    photo       = models.ImageField(upload_to=url)
-    email       = models.CharField(max_length=50)
+#        return ruta
+#    user        = models.OneToOneField(User)
+#    nombre      = models.CharField(max_length=50)
+#    apellido    = models.CharField(max_length=50)
+#    photo       = models.ImageField(upload_to=url)
+#    email       = models.CharField(max_length=50)
      # Other fields here
     
+#    def __unicode__(self):
+#        return self.user.username
+
+class Usuario(User):
+    ALUMNO = 'AL';
+    PROFESOR = 'PR'
+    AYUDANTE = 'AY'
+    ADMINISTRADOR = 'AD'
+    ALUMNO_AYUDANTE = 'AA'
+    OPCIONES = (
+        (ALUMNO, 'Alumno'),
+        (PROFESOR,'Profesor'),
+        (AYUDANTE,'Ayudante'),
+        (ADMINISTRADOR,'Administrador'),
+        (ALUMNO_AYUDANTE,'Alumno_Ayudante'),
+    )
+    rut = models.CharField(max_length=30, unique=True) # Field name made lowercase.
+    nombre = models.CharField(max_length=300)
+    tipo= models.CharField(max_length=2,
+                            choices=OPCIONES,
+                            default=ALUMNO)
+
+    class Meta:
+        db_table = u'usuario'
     def __unicode__(self):
-        return self.user.username
+        return u"tipo: {0}".format(self.tipo)
+
 
 #1ero
 class Ramo(models.Model):
@@ -38,21 +64,16 @@ class InstanciaRamo(models.Model):
     id_instancia_ramo = models.IntegerField(primary_key=True)
     id_ramo = models.ForeignKey(Ramo, db_column='id_ramo')
     ango = models.IntegerField()
-    semestre = models.TextField() # This field type is a guess.
+    semestre = models.BooleanField(default=False) # This field type is a guess. false = semestre 1, true = semestre 2
     grupo = models.IntegerField(null=True, blank=True)
     class Meta:
         db_table = u'instancia_ramo'
 #3ro
-class Alumno(models.Model):
-    id_alumno = models.IntegerField(primary_key=True)
-    #id_alumno = models.OneToOneField(User,primary_key=True,db_column='id')
-    rut = models.CharField(max_length=30, unique=True, db_column='RUT') # Field name made lowercase.
-    nombre = models.CharField(max_length=300)
-    email = models.CharField(max_length=150)
-    password = models.CharField(max_length=60)
+
+
+class Alumno(Usuario):
     class Meta:
-        db_table = u'alumno'
-    
+        db_table = u'alumno'    
     def __unicode__(self):
         return u"rut: {0}; nombre: {1}".format(self.rut, self.nombre)
 
@@ -62,49 +83,40 @@ class Alumno(models.Model):
 class Inscripcion(models.Model):
     id_instancia_ramo = models.ForeignKey(InstanciaRamo, db_column='id_instancia_ramo')
     grupo_por_defecto = models.IntegerField(null=True, blank=True)
-    id_alumno = models.ForeignKey(Alumno, db_column='id_alumno')
+    id_alumno = models.ForeignKey(Alumno,db_column='id')
     class Meta:
         db_table = u'inscripcion'
 #5to
-class Ayudante(models.Model):
-    id_ayudante = models.IntegerField(primary_key=True)
-    rut = models.CharField(max_length=30, unique=True, db_column='RUT') # Field name made lowercase.
-    nombre = models.CharField(max_length=300)
-    password = models.CharField(max_length=60)
-    email = models.CharField(max_length=150)
+class Ayudante(Usuario):        
     class Meta:
         db_table = u'ayudante'
 
+
 #6to
 class AyudanteRamo(models.Model):
-    id_instancia_ramo = models.ForeignKey(InstanciaRamo, primary_key=True, db_column='id_instancia_ramo')
-    id_ayudante = models.ForeignKey(Ayudante, db_column='id_ayudante')
+    id_instancia_ramo = models.ForeignKey(InstanciaRamo, primary_key=True, db_column='id_instancia_ramo')    
+    id_ayudante = models.ForeignKey(Ayudante, db_column='id')
     class Meta:
         db_table = u'ayudante_ramo'
 
 #7mo
-class Profesor(models.Model):
-    id_profesor = models.IntegerField(primary_key=True)
-    rut = models.CharField(max_length=30, unique=True, db_column='RUT') # Field name made lowercase.
-    nombre = models.CharField(max_length=300)
-    instituto = models.CharField(max_length=135, blank=True)
-    email = models.CharField(max_length=150)
-    password = models.CharField(max_length=60)
+class Profesor(Usuario):
+    instituto = models.CharField(max_length=135, blank=True)    
     class Meta:
         db_table = u'profesor'
 
 #8vo
 class Formulario(models.Model):
     id_formulario = models.IntegerField(primary_key=True)
-    id_profesorautor = models.ForeignKey(Profesor, db_column='id_profesorautor')
+    id_profesorautor = models.ForeignKey(Profesor, db_column='id')
     derivado = models.ForeignKey('self', db_column='derivado')
     autor = models.CharField(max_length=30)
     descripcion = models.CharField(max_length=600)
-    instanciado = models.TextField() # This field type is a guess.
+    instanciado = models.BooleanField(default=False) # This field type is a guess.
     fecha_creacion = models.DateField()
-    ecoevaluacion = models.TextField() # This field type is a guess.
+    ecoevaluacion = models.BooleanField(default=False) # This field type is a guess.
     numero_hijos = models.IntegerField()
-    publicado = models.TextField() # This field type is a guess.
+    publicado = models.BooleanField(default=False) # This field type is a guess.
     metadata = models.TextField(db_column='METADATA') # Field name made lowercase.
     categoria = models.IntegerField()
     class Meta:
@@ -135,16 +147,16 @@ class Opcion(models.Model):
 class ProfesorResponsable(models.Model):
     id_profesor_responsable = models.IntegerField(primary_key=True)
     id_instancia_ramo = models.ForeignKey(InstanciaRamo, db_column='id_instancia_ramo')
-    id_profesor = models.ForeignKey(Profesor, db_column='id_profesor')
+    id_profesor = models.ForeignKey(Profesor, db_column='id')
     colaborador = models.TextField() # This field type is a guess.
     class Meta:
         db_table = u'profesor_responsable'
 #12vo
 class Evaluacion(models.Model):
     id_evaluacion = models.IntegerField(primary_key=True)
-    id_profesor = models.ForeignKey(Profesor, db_column='id_profesor')
+    id_profesor = models.ForeignKey(Profesor, db_column='id')
     descripcion = models.CharField(max_length=3000)
-    activa = models.TextField() # This field type is a guess.
+    activa = models.BooleanField(default=False) # This field type is a guess.
     fecha_lanzamiento = models.DateField()
     fecha_finalizacion = models.DateField()
     fecha_recordatorio = models.DateField(null=True, blank=True)

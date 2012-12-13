@@ -1,53 +1,26 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="utf-8"/>
 	<title>
 		{% block title %} Titulo Base {% endblock %}
 	</title>
-	{% block js %}
-	<script type="text/javascript" src="/media/css/prefix-free.js"></script>
-	<script type="text/javascript">
-	/*$("tr").click(function(){
-		$(this).slideUp();
-
-	});
-
-	function activar(){
-		var ob=document.getElementsByName("table");
-		for (var i = 0; i < ob.childNode.length; i++) {
-			alert(ob[i].childNode.childNode.childNode.nodeValue);
-		};
-	}
-	alert("hola");
-	*/
-	</script>
-	<script type="text/javascript">
-	window.onload = function() {
-		var theRows = document.getElementsByTagName("tr");
-		for (i in theRows) {
-			i.onclick = function() {
-				highlight(this);
-			}
-		}
-	}
-
- 	$("tr").click(function(){
- 		$(this).toggleClass("otherstyle");
-	}
-</script>
+	{% block js %}	
+	<script type="text/javascript" src="/media/js/prefix-free.js"></script>
+	
 	{% endblock %}
 	{% block css %}
 		<link rel="stylesheet" href="/media/css/bootstrap.css">
-		<link rel="stylesheet" href="/media/css/estilo-distribucion-mejora.css">
+		<link rel="stylesheet" href="/media/css/estilo.css">
 	{% endblock %}
 </head>
 <body>
 	<header>
 		<nav>
 			<DIV Align="Center">
-			<a href="{% url vista_principal %}">
-			 <img src="/media/img/escudo_titulo.jpg"/> </a> 
+			<!--<a href="{% url vista_principal %}">
+			 <img src="/media/img/escudo_titulo.jpg"/> </a> -->
 			
 
 
@@ -68,20 +41,7 @@
 	</header>
 	<section>
 		{% block content %}
-		<table class="spreadsheet">
-		<tr>
-		<td>1</td>
-		<td>2</td>
-		</tr>
-		<tr>
-		<td>3</td>
-		<td>4</td>
-		</tr>
-		<tr>
-		<td>5</td>
-		<td>6</td>
-		</tr>
-		</table>
+		
 		{% endblock %}
 	</section>
 </html>

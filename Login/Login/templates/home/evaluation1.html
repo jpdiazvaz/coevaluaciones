@@ -3,32 +3,27 @@
 	Asignatura: Introduccion a la Programacion
 {% endblock %}
 {% block content %}
-	Codigo: INFO 013
+
+	<!--Codigo: INFO 013
 	Semestre: I
 	Año: 2012
-	Nombre: Introduccion a la Programacion
-	<ul class="nav nav-tabs" >
-			<li > <a href="#">Inicio</a></li>			
-			<li> <a href="#">Crear Formulario</a></li>				
-			<li class="active" > <a href="{% url vista_subjects %}">Ver Asignaturas*</a></li>
-			<li> <a href="{% url vista_account %}">Gestionar Cuenta*</a></li>
-			<li> 
-				<a Align="Right" href="{% url vista_logout %}">Cerrar Sesion</a>
-			    
-			</li>		
+	Nombre: Introduccion a la Programacion -->
+	<div class="logout"><a href="{% url vista_logout %}">Cerrar Sesion</a></div>
+	<div class = "menu_principal">	
+	<ul class="nav nav-pills" >
+			<li > <a href="{% url vista_principal %}">Estado Actual</a></li>			
+			<li> <a href="#">Formularios</a></li>				
+			<li class="active" > <a href="{% url vista_evaluation1 %}">Evaluaciones</a></li>
+			<li> <a href="{% url vista_account %}">Mi Cuenta</a></li>
 		
-			
-	</ul>
-
-	<div class="menu-vertical">
-	<ul class="nav nav-tabs nav-stacked span3">
-		<li> <a href="#">Ver Evaluaciones Anteriores</a></li>
-		<li class="active"> <a href="#">Realizar Evaluacion</a></li>			
-		
-	</ul>
+	</ul>		
 	</div>
-	
-	<a href="/" class="btn btn-primary">Cargar Ultima Configuración</a>
-	<a href="{% url vista_distribution1 %}" class="btn btn-primary">Nueva Distribución</a>
+
+	<div class = "botones0">
+	<p>
+		<a href="{% url vista_distribution1 %}" class="btn btn-primary">Nueva Distribución</a>
+		<a href="/ingresar" class="btn btn-primary">Cargar Ultima Configuración</a>
+	</p>
+	</div>
 
 {% endblock %}
