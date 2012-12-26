@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% extends "base.html" %}
+
+{% block title %}
+	Asignatura: Introducción a la Programación
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/estilo.css">
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/ordena_alfabetico.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/mover_alumnos.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/asignar_grupos.js"></script>
+{% endblock %}
+
+{% block tabs %}
+<h4> Nueva Evaluacion </h4>
+<div class="pull-right">
+  <a class="btn" href="#" title="Cancela los cambios y vuelve a la lista de formularios en edición">Salir</a>
+  <button class="btn btn-primary" type="submit">Guardar</button>
+</div>
+
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+  	<li ><a href="#">Propiedades</a></li>
+    <li class="active"><a href="/asignar_alumnos/">Alumnos</a></li>
+    <li ><a href="#">Formularios</a></li>
+  </ul>
+</div>
+{% endblock tabs %}	
+
+{% block content %}
+	<div class="contenedor-principal">
+		<div class="row-fluid">
+			<div class="span5"  id="contenedor-ramos">
+				<div style="height:170px; overflow:auto;">
+					<table class="table table-bordered table-condensed" style="font-size:90%;">
+						<thead>
+							<tr>
+								<th style="width:25%;">Codigo</th>
+								<th style="width:70%;">Ramo</th>
+								<th style="width:10%;"></th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for ramo in ramos %}
+								<tr style>
+									<td> <div class="cell">{{ ramo.sigla }} </div> </td>
+									<td> <div class="cell">{{ ramo.nombre }}</div> </td>
+									<td>  <label class="checkbox" id="{{ ramo.sigla }}">
+										      <input type="checkbox"> 
+										  </label>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="span2" ></div>
+			<div class="span5" >
+				<div style="cursor:auto; height:150px; overflow:auto;" id="div_tabla_de_grupos1">
+					<table class="table table-bordered table-condensed" style="font-size:90%;" id="tabla_de_grupos">
+						<thead>
+							<tr>
+								<th style="width: 90%;">Grupos</th>
+								<th style="width: 100%;">
+									<button type="submit" class="btn btn-primary btn-mini" id = "crear_grupo" title="Crea un nuevo grupo"><i class="icon icon-plus icon-white"></i></button>
+								</th>
+							</tr>
+						</thead>						
+						<tbody>
+						</tbody>					
+					</table>
+				</div>
+
+			</div>
+		</div>
+		
+		<div class="row-fluid">
+			<div class="span5" style="cursor:auto;height:380px; overflow:auto; font-size:90%;" id="div_sin_grupos">
+				
+				<table class="table table-bordered table-condensed" style="font-size:90%;" id="tabla_sin_grupos">
+					<thead>
+						<tr>
+							<th style="width: 25%;"> <strong> RUT  </strong></th>
+							<th style="width: 75%;"> 
+								<div style='float: left;'><strong> Nombre </strong></div>
+            					<div style='float: right;'>
+            						<button href="#modal-agregar-alumno" data-toggle="modal" type="submit" class="btn btn-primary btn-mini" id = "agregar_alumno" title="Agrega un alumno manualmente por su RUT"><i class="icon icon-plus icon-white"></i></button>
+            					</div>
+							</th>
+						</tr>
+					</thead>		
+					<tbody >	
+					</tbody>
+				</table>		
+				
+				
+			</div>
+
+
+			<div class="span2" style="margin-top: 20%;" id ="botones_asignacion">
+				<div style="width: 50%; margin: 0 auto;">
+					<a class="btn btn-mini" id="desasignar" >
+						<i class="icon-backward"></i></a>
+					<a class="btn btn-mini" id="asignar">
+						<i class="icon-forward"></i></a>
+				</div>
+			</div>
+
+		<!-- LADO DERECHO CREAR GRUPO, TABLA DE GRUPOS Y TABLA DE ALUMNOS ASIGNADOS-->			
+			<div  class="span5"id = "div_con_grupos">
+				<div class="division2"></div> <!-- division para las tablas-->		
+				
+				<div style="height:380px; overflow:auto;" id="div_tabla_de_grupos2">
+					<table class="table table-bordered table-condensed" style="cursor:auto; font-size:80%;" id="tabla_grupos_asignados">
+						<thead>
+							<tr>
+								<th style="width: 25%;"> <strong> RUT  </strong></td>
+								<th style="width: 75%;"> <strong> Nombre </strong></td>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<br>		
+	</div>
+
+<footer>
+	<div class="modal-footer">
+		<div class="pull-right">
+			<button href="#modal-nueva" data-toggle="modal" role="button" class="btn"  title="Borra los grupos creados">
+				Desechar distribución</button>
+			<button href="#modal-ultima" data-toggle="modal" role="button" class="btn btn-primary" id="solicitar-distribuciones"  title="Carga una distribución de grupos ya utilizada en otra evaluación, a partir de los ramos seleccionados">
+				Cargar distribución anterior</button>
+		</div>
+	</div>
+
+
+<!-- MODAL ULTIMA DISTRIBUCIÓN SIN SELECCION
+<div id="modal-ultima" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">¿Seguro que quiere cargar la última distribución?</h3>
+  </div>
+  <div class="modal-body">
+    <p>Se perderán todos los grupos que ha creado.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+    <button href="#" class="btn btn-danger" data-dismiss="modal" aria-hidden="true" id="ultima-distribucion">Si, cargar</button>
+  </div>
+</div>
+-->
+
+
+<div id="modal-ultima" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Seleccione una distribución anterior</h3>
+  </div>
+  <div class="modal-body">
+  	<p> Si carga una distribución anterior, se borrarán los grupos de trabajo que ya ha creado </p>
+    <div style="max-height:380px; overflow:auto;" id="div_tabla_cargar_distribucion">
+		<table class="table table-condensed" style="cursor:auto; font-size:80%;" id="tabla_cargar_distribucion">
+			<thead>
+				<tr>
+					<th style="width: 10%;"> <strong> ID  </strong></td>
+					<th style="width: 65%;"> <strong> Descripcion </strong></td>
+				    <th stlye="width: 25%;"> <strong> Fecha publicacion </strong></td>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+    <button href="#" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="cargar-distribucion">Cargar distribución</button>
+  </div>
+</div>
+
+
+
+<div id="modal-nueva" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">¿Seguro que quiere desechar la distribución actual?</h3>
+  </div>
+  <div class="modal-body">
+    <p>Se perderán todos los grupos que ha creado.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+     <button href="#" class="btn btn-danger" data-dismiss="modal" aria-hidden="true" id="nueva-distribucion">Si, desechar</button>
+  </div>
+</div>
+</footer>
+
+
+
+<div id="modal-agregar-alumno" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Busque al alumno que desee agregar.</h3>
+  </div>
+  <div class="modal-body">
+  	<p>Ingrese el RUT del alumno a buscar en el sistema académico.</p>
+  	<form class="form-search">
+	  <input type="text" placeholder="RUT" class="input-medium search-query">
+	  <button type="submit" class="btn">Buscar</button>
+	</form>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+     <button href="#" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="nueva-distribucion">Cargar alumno</button>
+  </div>
+</div>
+</footer>
+
+
+
+	
+{% endblock %}

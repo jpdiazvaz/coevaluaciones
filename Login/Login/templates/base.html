@@ -1,51 +1,47 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="description" content="Formularios de evaluación para alumnos y profesores">
-    <!--<link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" media="screen">-->
-    <style>
-      .navbar-text a {
-          color: #999999;
-      }
-      .navbar-text a:hover {
-          color: white;
-      }
-    </style>
-{% block stylesheets %}
-<link rel="stylesheet" href="/media/css/bootstrap.css">
-<link rel="stylesheet" href="/media/css/estilo.css">
-{% endblock %}
-{% block js %} {% endblock %}
-    <title>{% block title %}Evaluaciones{% endblock %}</title>
-  </head>
-  <body>
-    <div class="container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8"/>
+	<title>
+		{% block title %} Titulo Base {% endblock %}
+	</title>
+	{% block js %}	
+	<script type="text/javascript" src="/media/js/prefix-free.js"></script>
+	
+	{% endblock %}
+	{% block css %}
+		<link rel="stylesheet" href="/media/css/bootstrap.css">
+		<link rel="stylesheet" href="/media/css/estilo.css">
+	{% endblock %}
+</head>
+<body>
+	<header>
+		<nav>
+			<DIV Align="Center">
+			<a href="{% url vista_principal %}">
+			 <img src="/media/img/escudo_titulo.jpg"/> </a> 
+			
 
-{% block nav %}
-<div class="navbar navbar-inverse">
-  <div class="navbar-inner">
-    <ul class="nav">
-      <li class="{% block nav1_active %}{% endblock nav1_active %}"><a href="/ingresar/">Estado Actual</a></li>
-      <li class="{% block nav2_active %}{% endblock nav2_active %}"><a href="#">Formularios</a></li>
-      <li class="{% block nav3_active %}{% endblock nav3_active %}"><a href="/evaluation1/">Evaluaciones</a></li>
-      <li class="{% block nav4_active %}{% endblock nav4_active %}"><a href="/gestionar_cuenta/">Mi Cuenta</a></li>
-    </ul>
 
-{% block user_tag %}
-    <p class="navbar-text pull-right"><a href="#">{{ request.user.get_full_name }}</a> | <a href="{% url vista_logout %}">Salir</a></p>
-{% endblock user_tag %}
+			</DIV>
+			{% if user.is_authenticated %}
+				<div Align="Center">
+					<h4> Bienvenid@ {{ user.first_name }} {{ user.last_name }} </h4>
+				</div>	
+		
+		
 
-  </div>
-</div> 
-{% block tabs %}{% endblock tabs %}
-{% endblock nav %}
-
-{% block content %}{% endblock content %}
-    </div>
-    <script type="text/javascript" src="{{ STATIC_URL }}jquery/jquery-1.8.2.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
-{% block scripts %}{% endblock scripts %}
-  </body>
+<!--				<DIV style="text-align:right; margin-right: 12px">
+					
+					<a href="{% url vista_logout %}"> Cerrar Sesion </a>
+				</DIV> -->
+			{% endif %}
+		</nav>
+	</header>
+	<section>
+		{% block content %}
+		
+		{% endblock %}
+	</section>
 </html>
-

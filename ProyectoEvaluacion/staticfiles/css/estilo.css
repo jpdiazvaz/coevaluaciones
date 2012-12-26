@@ -1,0 +1,30 @@
+tr.selected{
+ 	background: skyblue; 
+}
+
+tr.selected:hover{ 
+	background: skyblue; 
+}
+
+table tr:hover{
+	background-color:#skyblue;
+}
+
+td:hover{
+	color: firebrick;
+}
+
+/*
+thead, tbody{
+    display:block;
+}​
+
+*/
+/*
+thead > th, tbody > tr{
+    display:block;
+}​
+table>thead th {
+  position:relative;
+  top: 0px;/*expression(offsetParent.scrollTop); IE5+ only*/
+}

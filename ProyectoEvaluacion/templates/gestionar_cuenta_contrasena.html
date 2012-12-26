@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block nav4_active %}active{% endblock %}
+{% block title %}
+	Mi Cuenta
+{% endblock %}
+{% block content %}
+
+	
+	<div class="container">
+		<div class="nav nav-tabs">
+			<li class="active"> 
+				<a href="#">Cambiar contraseña</a>
+			</li>
+			<li> 
+				<a href="/gestionar_cuenta_correo/">Cambiar correo</a>
+			</li>
+		{{texto}}
+		</div>
+
+		{% if form.non_field_errors  %}
+			<div class="alert alert-error">
+				{% for error in form.non_field_errors %}
+					{% if error != "Campo obligatorio"%}
+						<p> {{ error }} </p>
+					{% endif %}
+				{% endfor %}
+			</div>
+		{% endif %}
+
+		{% if success %}
+			<div class="alert alert-success">
+				Su contraseña se ha modificado
+			</div>
+		{% endif %}
+
+		<form class="form-horizontal" action="." method="POST"> {% csrf_token %}
+			<input type="hidden" name="action" value="changepw">
+			{% if form.Password_Antigua.errors or "La contraseña actual no es correcta" in form.non_field_errors %}
+			<div class="control-group error">
+			{% else %}
+			<div class="control-group">
+			{% endif %}
+				<label class="control-label" for="existingpw">Contraseña actual </label>
+				<div class="controls"> {{ form.Password_Antigua }} </div>
+
+			</div>
+
+			{% if form.Nueva_Password.errors or "Las contraseñas no coinciden" in form.non_field_errors or "La nueva contraseña debe tener un mínimo de 4 caracteres" in form.non_field_errors %}
+			<div class="control-group error">
+			{% else %}
+			<div class="control-group">
+			{% endif %}
+				<label class="control-label" for="password">Nueva contraseña </label>
+				<div class="controls"> {{ form.Nueva_Password }} </div>
+
+			</div>
+
+			{% if form.Repetir_Nueva_Password.errors or "Las contraseñas no coinciden" in form.non_field_errors or "La nueva contraseña debe tener un mínimo de 4 caracteres" in form.non_field_errors %}
+			<div class="control-group error">
+			{% else %}
+			<div class="control-group">
+			{% endif %}
+				<label class="control-label" for="confirmpw">Repita su nueva contraseña </label>
+				<div class="controls"> {{ form.Repetir_Nueva_Password }} </div>
+
+			</div>
+
+			<div class="form-actions">
+				<button class="btn btn-primary" type="submit" name="submit">Cambiar contraseña</button>
+			</div>
+		</form>
+
+<!--
+			{% csrf_token %}	
+			{{form.as_p}}
+			<button type="submit" class="btn btn-danger" > 
+				Guardar Cambios
+			</button>
+-->
+		
+		
+	</div>
+{% endblock %}

@@ -173,21 +173,12 @@ def subjects_view(request):
 def subject1_view(request):
 	return render_to_response('home/asignatura1.html', context_instance=RequestContext(request))
 
-
-
 @login_required(redirect_field_name='/ingresar')
 def evaluation1_view(request):
 	return render_to_response('home/evaluation1.html', context_instance=RequestContext(request))
 
-
-def properties_view(request):
-	return render_to_response('home/properties.html', context_instance=RequestContext(request))
-
 @login_required(redirect_field_name='/ingresar')
 def distribution1_view(request):
-	#if (request.method == "GET"):
-		
-	#else:
 	usr = User.objects.all()
 	#usr = Alumno.objects.all()
 	valores =range(1,len(usr)+1)

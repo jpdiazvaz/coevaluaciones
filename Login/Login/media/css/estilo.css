@@ -68,10 +68,10 @@
 	/*transition:all 0.5s ease-in;
 	translateX(10px);*/
 	display: inline-block;
-	margin-left: 0%;
+	margin-left: 5%;
 	min-height: 610px;	
 	vertical-align: top;
-	width: 54%;
+	width: 50%;
 
 	-webkit-transition:all 0.5s ease-in;
 	
@@ -79,10 +79,10 @@
 .sub-contenedor2{
 	
 	display: inline-block;
-	margin-right: 0%;
+	margin-right: 1%;
 	min-height: 610px;
 	vertical-align: top;
-	width: 45%;
+	width: 38%;
 	
 }
 
@@ -169,7 +169,7 @@ td{
 	margin: 3% 0% 0% 3%;
 	overflow: auto;
 	padding: 1em 1em;	
-	width:60%;
+	width:65%;
 
 }
 .tabla_grupos{
@@ -178,7 +178,7 @@ td{
 	margin-left: 3%;
 	overflow: auto;
 	padding: 1em 1em;
-	width:55%;
+	width:60%;
 }
 .tabla_asignados{
 	cursor: pointer;

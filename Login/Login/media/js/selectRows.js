@@ -1,27 +1,5 @@
 var alumnos_asignados = new Array();
-var tamano = 0;
-var grupo_actual="";
-var grupo_anterior="";
-var borrado = 0;
 var c  = 0;
-function is_alumn(alumnos, ID){  
-  for (var i = 0; i < alumnos.length; i++) {
-    if (alumnos[i][0]  == ID){
-      return 1;
-    }  
-  };
-  return 0;
-}
-function get_alumn(alumnos){
- for (var i = 0; i < alumnos.length; i++) {
-    if (alumnos[i][0]  == ID){
-      return 1;
-    }  
-  };
-  return 0; 
-}
-
-
 var tableSelect = {
 
 multipleRows: function (event) {
@@ -79,39 +57,27 @@ singleRow: function (event) {
       var tableBody = rowElement.parent();
       this.clearSelection();
 
-
-
-
-//caso despues de borrar
-      if (borrado == 1){ 
-        grupo_anterior=""; 
-        grupo_actual = $(td).text();        
-         borrado=1-borrado;
-      //caso sin borrar y solo cambiar de grupo
-      }else{        
-        grupo_anterior=grupo_actual;
-        grupo_actual = $(td).text();
-        //desvanesco el grupo anterior para mostrar el nuevo seleccionado
-        $("#tabla_grupos_asignados tbody tr").each(function(){
-          $(this).removeClass("selected");
-          if ($(this).hasClass(grupo_anterior)){
-              $(this).fadeOut(4);
-          }
-        });
-
-      }
-
-      $("#grupo").text('').append("<strong> Integrantes "+grupo_actual+":</strong>");
-
-      $("#tabla_grupos_asignados tbody tr").each(function(){
-            if ($(this).hasClass(grupo_actual)){
-              $(this).fadeIn(4);
-            }
-        });
-
-
-     
-      
+/*      var texto = $(td).text();
+      $("#grupo").text('').append("<strong> Integrantes "+texto+":</strong>");
+      tableBody.children().each(function(){
+        if ($(this).hasClass("selected")){
+          var numgrupo = $(this).text(); //obtengo el grupo anterior seleccionado
+          var num_grupo_arr = numgrupo.split(" ");
+          var numgrupo = parseInt(num_grupo_arr[1]);
+          var alumnos = new Array();
+          $("#tabla_grupos_asignados tbody tr").each(function (){
+              var campo1,campo2;              
+              campo1 = $(this).children("td").text();
+              campo2 = $(this).next("td").text();
+              group[0] = campo1;
+              group[1] = campo2;              
+              alumnos_asignados[numgrupo-1][c++] = group;
+              $(this).hide();
+          
+          });
+          c = 0;
+        }
+      }); */
       //selecciono el nuevo grupo.
       tableBody.children().removeClass("selected");
       rowElement.addClass("selected");
@@ -135,6 +101,8 @@ clearSelection: function () {
 };
 //VARIABLE TABLESELECT
 
+var tamano = 0;
+
 //FUNCIONES A EVENTOS CLICKS !
 $(document).ready(function () {
 
@@ -149,7 +117,6 @@ $(document).ready(function () {
 
 // TABLA 2
   $("#tabla_grupos_asignados tbody td").attr('unselectable', 'on');
-//cosa nueva que agregare  
 
   $("#tabla_grupos_asignados tbody").click(function (event) {
     tableSelect.multipleRows(event);
@@ -174,26 +141,22 @@ FALTA ORDENAR LOS DATOS DENTRO DE LA TABLA
 
     $("#asignar").click(function (event){
          // $("#tabla_sin_grupos").find("tr:eq(2) .selected").remove();
-         $("#tabla_de_grupos tbody tr").each(function(){
-            if ($(this).hasClass("selected")){              
-              $("#tabla_sin_grupos tbody tr").each(function (index){
-                  //var campo1,campo2;
-                  //campo1 = $(this).children("td").text();
-                  //campo2 = $(this).next("td").text();
-                  if ($(this).hasClass("selected")){                  
-                      //$(this).fadeOut(40);
-                      $(this).addClass(grupo_actual);
-                      jQuery($(this)).appendTo('#tabla_grupos_asignados tbody');
-                      $(this).removeClass("selected");
-                      //$(this).fadeOut(400, function(){
-                      //    $(this).remove();
-                      // });
-                     // $("tabla_grupos_asignados tbody").appendChild($(fila));
-                      //$("#tabla_grupos_asignados tbody").append("<tr><td > <p>"+campo1+"</p> </td><td> <p> "+campo2+" </p> </td></tr>");
-                  }
-              });
-            }
 
+          $("#tabla_sin_grupos tbody tr").each(function (index){
+              var campo1,campo2;
+              campo1 = $(this).children("td").text();
+              campo2 = $(this).next("td").text();
+              if ($(this).hasClass("selected")){                  
+                  //$(this).fadeOut(40);
+
+                  jQuery($(this)).appendTo('#tabla_grupos_asignados tbody');
+                  $(this).removeClass("selected");
+                  //$(this).fadeOut(400, function(){
+                  //    $(this).remove();
+                  // });
+                 // $("tabla_grupos_asignados tbody").appendChild($(fila));
+                  //$("#tabla_grupos_asignados tbody").append("<tr><td > <p>"+campo1+"</p> </td><td> <p> "+campo2+" </p> </td></tr>");
+              }
           });
 
     });
@@ -201,61 +164,59 @@ FALTA ORDENAR LOS DATOS DENTRO DE LA TABLA
 
     $("#desasignar").click(function (event){    
 
-        $("#tabla_de_grupos tbody tr").each(function(){
-            if ($(this).hasClass("selected")){
-                  //var grupo = $(this).text();
-                  $("#tabla_grupos_asignados tbody tr").each(function (index){
-                      //var campo1,campo2;
-                      //campo1 = $(this).children("td").text();
-                      //campo2 = $(this).next("td").text();
-                      if ($(this).hasClass("selected")){
-                          
-                          var c1=$(this).text();                          
-                          $(this).removeClass(grupo_actual);
-                          //$(this).fadeOut(400, function(){
-                            //$(this).remove();
-                        //});
-                          jQuery($(this)).appendTo('#tabla_sin_grupos tbody');
-                          $(this).removeClass("selected");
-                          //funciona
-                          //$("#tabla_sin_grupos tbody").append($("<tr> <td>"+campo1+"</td><td  nowrap>"+campo2+"</td> </tr>"));
-                      }
-                  });
-            }
-        });
+          $("#tabla_grupos_asignados tbody tr").each(function (index){
+              var campo1,campo2;
+              if ($(this).hasClass("selected")){
+                  campo1 = $(this).children("td").text();
+                  campo2 = $(this).next("td").text();
+
+                  //$(this).fadeOut(400, function(){
+                    //$(this).remove();
+                //});
+                  jQuery($(this)).appendTo('#tabla_sin_grupos tbody');
+                  $(this).removeClass("selected");
+                  //funciona
+                  //$("#tabla_sin_grupos tbody").append($("<tr> <td>"+campo1+"</td><td  nowrap>"+campo2+"</td> </tr>"));
+              }
+          });
 
     });
 
-    $("#borrar_grupo").click(function (event){  
-          borrado = 1-borrado;        
-          $("#grupo").text('');
-          $("#tabla_de_grupos tbody tr").each(function (index){                                        
-              if ($(this).hasClass("selected")){ //debe estar seleccionado un grupo
-                  //desasignar alumnos del grupo que se elimina
-                    $("#tabla_grupos_asignados tbody tr").each(function(){
-                      var classname = $(this).attr("class");
-                      alert(classname);
-                      if ($(this).hasClass("selected")){
-                        $(this).removeClass("selected");  
-                      }                    
-                      if ($(this).hasClass(grupo_actual)){
-                        $(this).removeClass(grupo_actual);
-                        jQuery($(this)).appendTo('#tabla_sin_grupos tbody');
-                      }                     
-                      
-                    });
-                  $(this).fadeOut(4, function(){
+    $("#borrar_grupo").click(function (event){
+          $("#tabla_de_grupos tbody tr").each(function (index){
+              var campo;
+              campo = $(this).children("td").text();              
+              if ($(this).hasClass("selected")){              
+                  $(this).fadeOut(40, function(){
                     $(this).remove(); //desasignar el grupo de esos alumnos y dejarlos en la otra tabla!
                     //tamano--;
                   });                  
               }
           });
+
+
     });    
     //falta agregar el grupo
     $("#crear_grupo").click(function (event){
           //var tamano = $("#tabla_de_grupos tr").length;          
-        var campo = "Grupo "+(++tamano);          
+          var campo = "Grupo "+(++tamano);          
         $("#tabla_de_grupos tbody").append("<tr><td>"+campo+"</td></tr>");
+        for (var i = 0; i < alumnos_asignados.length; i++) {
+          var c1,c2;
+          alert("grupo: "+i);
+          for (var j = 0; j < alumnos_asignados[i].length; j++) {
+                      c1 = alumnos_asignados[i][j][0];
+                      c2 = alumnos_asignados[i][j][1];
+                      alert("alumno: "+j+" -  ID: "+c1 +" - Nombre: "+ c2);
+          };                   
+          
 
+          
+     
+        };
+      
     });    
+
+
+
 });

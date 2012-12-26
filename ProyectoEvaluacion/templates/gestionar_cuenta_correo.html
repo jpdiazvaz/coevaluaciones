@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block nav4_active %}active{% endblock %}
+{% block title %}
+	Mi Cuenta
+{% endblock %}
+{% block content %}
+
+	
+	<div class="container">
+		<div class="nav nav-tabs">
+			<li> 
+				<a href="/gestionar_cuenta_contrasena/">Cambiar contraseña</a>
+			</li>
+			<li class="active"> 
+				<a href="#">Cambiar correo</a>
+			</li>
+		{{texto}}
+		</div>
+
+		{% if form.Email.errors %}
+			<div class="alert alert-error">
+				{% for error in form.Email.errors %}
+					<p> {{ error }} </p>
+				{% endfor %}
+			</div>
+		{% endif %}
+
+		{% if success %}
+			<div class="alert alert-success">
+				Su correo se ha modificado
+			</div>
+		{% endif %}
+
+		<form class="form-horizontal" action="." method="POST"> {% csrf_token %}
+			<div class="control-group">
+				<label class="control-label" for="existingemail">Correo actual </label>
+				<div class="controls"> <label> {{ correo }} </label> </div>
+			</div>
+
+			<input type="hidden" name="action" value="changeemail">
+			{% if form.Email.errors %}
+			<div class="control-group error">
+			{% else %}
+			<div class="control-group">
+			{% endif %}
+				<label class="control-label" for="existingemail">Nuevo correo </label>
+				<div class="controls"> {{ form.Email }} </div>
+			</div>
+
+			<div class="form-actions">
+				<button class="btn btn-primary" type="submit" name="submit">Cambiar correo</button>
+		</form>
+		
+		
+	</div>
+{% endblock %}

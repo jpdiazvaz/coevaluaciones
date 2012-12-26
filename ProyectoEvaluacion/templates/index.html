@@ -1,0 +1,87 @@
+<head>
+	<meta charset="utf-8"></meta>
+	<meta content="Formularios de evaluación para alumnos y profesores" name="description"></meta>
+	<link media="screen" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+  <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" media="screen">
+  <script type="text/javascript" src="{{ STATIC_URL }}jquery/jquery-1.8.2.min.js"></script>
+	<style>  
+      body {
+      	padding-top: 10px;
+      }
+      .navbar-text a {
+        color: #999999;
+      }
+      .navbar-text a:hover {
+        color: white;
+      }
+    </style>
+    <style>      
+      .titulo
+      {
+         color: #4b7893;
+         display: block;
+         font-size: 30px;
+         font-family: 'Quicksand', sans-serif;
+         margin:  auto;
+         margin-top: 1.2em;
+         margin-bottom: -10px;
+         width: 270px;
+         text-align:center;
+      }
+      .mg {margin-bottom:10px;margin-top:5px;}
+      .text-center {text-align: center; }
+      .midiv{
+        position: absolute;
+        left: 25%;
+        top: 25%;
+        height: 200px;
+        margin-top:-100px;
+        width: 300px;
+        margin-left: 75px;
+      }
+   
+    </style>
+    {% block css %} 
+		  <link rel="stylesheet" href="{{ STATIC_URL }}css/estilo.css">
+	  {% endblock %}
+    <title>
+      Evaluaciones
+    </title>
+</head>
+{% block nav %}{% endblock nav %}
+{% block content %}
+<div class="midiv">
+  <p class="titulo">
+    Evaluaciones
+  </p>
+    <strong>{{ mensaje }}</strong>
+  <br>
+	<form class="form-horizontal mg" method="POST" action=".">
+		{% csrf_token %}
+		<input type="hidden" name="next" value="{{ next }}">
+		{% if form.errors %}
+		<p class="text-error" style='text-align:center'>
+      El nombre de usuario o la contraseña introducidos no son correctos.
+    </p>
+		{% endif %}
+	  <div class="control-group" align="center">
+      <input id="u" class="input-large" type="text" placeholder="RUT" style="height:35px" name="{{ form.username.name }}">
+    </div>
+	  <div class="control-group" align="center">
+      <input type="password" id="p" class="input" name="{{ form.password.name }}" placeholder="Contraseña" style="height:35px">
+	  </div>
+	  <div class="control-group" align="center">
+	   		<button class="btn btn-info input-large" type="submit"> Ingresar </button>
+	  </div>
+    <div class="control-group" align="center">
+  	  <a href="/recuperar_pass/" class="text-error" align="right"> ¿Olvidaste tu contraseña? </a>
+  	</div>
+  </form>
+
+
+
+</div>
+{% endblock content %}
+
+
+

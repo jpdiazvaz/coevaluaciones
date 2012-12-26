@@ -1,14 +1,8 @@
 {% extends 'base.html' %}
-{% block nav3_active %}active{% endblock %}
-
 {% block title %}
-	Asignatura: Introducción a la Programación
+	Asignatura: Introduccion a la Programacion
 {% endblock %}
 
-{% block css %}
-<link rel="stylesheet" href="/media/css/bootstrap.css">
-<link rel="stylesheet" href="/media/css/estilo.css">
-{% endblock %}
 {% block js %}
 <script type="text/javascript" src="/media/js/jquery.js"></script>
 <script type="text/javascript" src="/media/js/deletecreation_groups.js"></script>
@@ -32,6 +26,11 @@ for (var x=0;x<ids.length;x++){
     accion(ids,nombres);
 };
 
+
+
+$(function() {
+        $("#tabla_de_grupos").selectable();
+    });
 
 
 $(document).ready(function() {
@@ -59,18 +58,50 @@ for (var x=0;x<ids.length;x++){
 };*/
 </script>
 
+
+
+
 {% endblock %}
 
-{% block tabs %}
-<ul class="nav nav-tabs">
-  <li ><a href="/properties/">Propiedades</a></li>
-  <li class="active"><a href="/distribution1/">Alumnos</a></li>
-  <li ><a href="#">Formularios</a></li>
-</ul>
-{% endblock tabs %}	
-
 {% block content %}
-		
+	<!--Codigo: INFO 013
+	Semestre: I
+	Año: 2012
+	Nombre: Introducción a la Programación-->
+	<div class="logout"><a href="{% url vista_logout %}">Cerrar Sesion</a></div>
+	<div class = "navbar navbar-inverse">
+		<div class="navbar-inner">
+			<div class="container">
+			
+				<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</a>
+				 
+				<!-- Be sure to leave the brand out there if you want it shown -->
+				<a class="brand" href="#">Estado Actual</a>
+				<a class="navbar" href="#" name="Formularios">
+				
+				</a>
+				<a class="brand" href="#">Nueva Evaluacion</a>
+				<a class="brand" href="#">Mi Cuenta</a>
+				 
+
+				 
+			</div>
+		</div>
+		<!--<ul class="nav nav-pills" >
+				<li > <a href="{% url vista_principal %}">Estado Actual</a></li>
+				<li> <a href="#">Formularios</a></li>				
+				<li class="active" > <a href="{% url vista_evaluation1 %}">Evaluaciones</a></li>
+				<li> <a href="{% url vista_account %}">Mi Cuenta</a></li>
+		</ul>	-->
+	</div>
+
+	
+	
 		<div class="contenedor-principal">
 
 			
@@ -186,7 +217,7 @@ for (var x=0;x<ids.length;x++){
 
 		<div id="botones1">									
 			<button type="submit" class="btn btn-primary" id="asignar">Asignar</button>			
-			<form action="." method="GET"><button type="submit" class="btn btn-primary">Guardar Distribución</button></form>		
+			<button type="submit" class="btn btn-primary">Guardar Distribución</button>			
 			<button type="submit" class="btn btn-primary" id="desasignar">Desasignar</button>			
 		</div>
 	

@@ -1,0 +1,18 @@
+/* table cells */
+div .cell {
+    height: 22px;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* table column widths */
+table {
+    font-size: 90%;
+    table-layout: fixed;
+}
+
+table th, table td {
+    overflow: hidden;
+}

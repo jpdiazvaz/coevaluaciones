@@ -1,19 +1,29 @@
 {% extends 'base.html' %}
-{% block nav3_active %}active{% endblock %}
 {% block title %}
-	Sección Evaluaciones
+	Asignatura: Introduccion a la Programacion
 {% endblock %}
-
-{% block tabs %}
-<ul class="nav nav-tabs">
-  <li class="active"><a href="/properties/">Propiedades</a></li>
-  <li ><a href="/distribution1/">Alumnos</a></li>
-  <li ><a href="#">Formularios</a></li>
-</ul>
-{% endblock tabs %}	
-
 {% block content %}
 
+	<!--Codigo: INFO 013
+	Semestre: I
+	Año: 2012
+	Nombre: Introduccion a la Programacion -->
+	<div class="logout"><a href="{% url vista_logout %}">Cerrar Sesion</a></div>
+	<div class = "menu_principal">	
+	<ul class="nav nav-pills" >
+			<li > <a href="{% url vista_principal %}">Estado Actual</a></li>			
+			<li> <a href="#">Formularios</a></li>				
+			<li class="active" > <a href="{% url vista_evaluation1 %}">Evaluaciones</a></li>
+			<li> <a href="{% url vista_account %}">Mi Cuenta</a></li>
+		
+	</ul>		
+	</div>
 
+	<div class = "botones0">
+	<p>
+		<a href="{% url vista_distribution1 %}" class="btn btn-primary">Nueva Distribución</a>
+		<a href="/ingresar" class="btn btn-primary">Cargar Ultima Configuración</a>
+	</p>
+	</div>
 
 {% endblock %}

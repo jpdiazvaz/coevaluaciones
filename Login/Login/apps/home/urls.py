@@ -12,5 +12,4 @@ urlpatterns = patterns('Login.apps.home.views',
 	url(r'^evaluation1/$', 'evaluation1_view', name='vista_evaluation1'),
 	url(r'^distribution1/$', 'distribution1_view', name='vista_distribution1'),
 	url(r'^add_student1/$', 'add_student1_view', name='vista_agregar_alumno1'),
-	url(r'^properties/$', 'properties_view', name='vista_propiedades'),
 	)

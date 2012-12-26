@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block nav1_active %}active{% endblock %}
+{% block title %}
+	Bienvenido Profesor
+{% endblock %}
+{% block content %}
+
+
+<div class = "display">
+	<div class="texto">
+		<p align="center">Evaluaciones Finalizadas</p>
+		<p align="center"><h3>Nombre de Evaluacion</h3></p>
+	</div>
+	<div class="curso">
+		<p align="center">Nombre Curso</p>
+	</div>
+	<div class="accion">
+		<a href="#">Ver Resultados</a>
+	</div>
+</div>
+
+<div class = "display">
+	<div class="texto">
+		<p align="center">Evaluaciones en Curso</p>
+		<p align="center"><h3>Nombre de Evaluacion</h3></p>
+	</div>
+	<div class="curso">
+		<p align="center">Nombre Curso</p>
+	</div>
+	<div class="accion">
+		<a href="#">Ver Resultados Parciales</a>
+	</div>
+</div>
+
+<div class = "display">
+	<div class="texto">
+		<p align="center">Evaluaciones no Lanzadas</p>
+		<p align="center"><h3>Nombre de Evaluacion</h3></p>
+	</div>
+	<div class="curso">
+		<p align="center">Nombre Curso</p>
+	</div>
+	<div class="accion">
+		<a href="#">Editar</a>
+	</div>
+</div>
+
+	
+{% endblock %}
