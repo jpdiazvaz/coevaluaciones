@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Asignatura: Introducción a la Programación
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css">
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/estilo.css">
+<script type="text/javascript" src="{{ STATIC_URL }}js/mover_alumnos.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/asignar_grupos.js"></script>
+
+<style  type="text/css">
+tr.selected { background: skyblue; }
+
+tr.selected:hover{ background: skyblue; }
+table tr:hover{
+	background-color: #FAFEFE;
+}
+td:hover{
+	color: firebrick;
+}
+
+
+#contenedor-tabla-ramos{
+	max-height: 200px;
+	overflow: auto;
+}
+
+
+#contenedor-tabla-sin-grupos{
+	max-height: 200px;
+	overflow: auto;
+}
+
+#contenedor-tabla-con-grupos{
+	max-height: 200px;
+	overflow: auto;
+}
+
+#contenedor-tabla-grupos{
+	max-height: 200px;
+	overflow: auto;
+}
+</style>
+
+{% endblock %}
+
+{% block tabs %}
+<ul class="nav nav-tabs">
+  <li ><a href="/properties/">Propiedades</a></li>
+  <li class="active"><a href="/asignar_alumnos/">Alumnos</a></li>
+  <li ><a href="#">Formularios</a></li>
+</ul>
+{% endblock tabs %}	
+
+{% block content %}
+	
+	<div class="row-fluid show-grid">
+
+		<div class="span5" id="contenedor-ramos">
+			<div class="row-fluid show-grid">
+				<div class="span12" id="contenedor-tabla-ramos">
+					<table class="table table-bordered table-condensed">
+						<thead>
+							<tr>
+								<th style="width: 25%;">Codigo</th>
+								<th style="width: 70%;">Ramo</th>
+								<th style="width: 5%;"></th>
+							</tr>
+						</thead>
+						<tbody style="height:150px;overflow:auto;">	
+							{% for ramo in ramos %}
+								<tr style>
+									<td> <div class="cell">{{ ramo.sigla }} </div> </td>
+									<td> <div class="cell">{{ ramo.nombre }}</div> </td>
+									<td>  <label class="checkbox" id="{{ ramo.sigla }}">
+										      <input type="checkbox"> 
+										  </label>
+									</td>
+								</tr>
+							{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+
+
+			<div class="row-fluid show-grid">
+				<div class="span6" id="contenedor-botones-nueva">
+					
+					<a href="#" role="button" class="btn btn-primary" id="nueva-distribucion"	data-toggle="modal" title="Carga una nueva distribución a partir de los ramos seleccionados">
+						Nueva distribución</a>
+
+   
+				</div>
+
+
+
+				<div class="span6" id="contenedor-botones-cargar">
+					<a href="#" role="button" class="btn" id="ultima-distribucion" 	data-toggle="modal" title="Carga la última distribución a partir de los ramos seleccionados">
+					Última distribución</a>
+
+
+				</div>
+			</div>
+		</div>		
+		
+
+		<div class="span7" id="contenedor-principal-tabla-sin-grupos">
+			<div class="row-fluid show-grid">
+				<p><strong> Alumnos por asignar: </strong></p>
+				<div class="span12" id="contenedor-tabla-sin-grupos">
+					<table class="table table-bordered table-condensed" id="tabla_sin_grupos">
+						<thead>
+							<tr>
+							<th style="width: 30%;"> RUT</th>
+							<th style="width: 70%;">
+								
+								Nombre
+								
+								<div class="pull-right">
+									<button  class="btn btn-success" value="Agregar" title="Agrega alumnos que no se encuentran en la lista"><i class="icon icon-plus"></i></button>
+								</div>
+							</th>
+
+							</tr>
+						</thead>		
+						<tbody style="max-height:150px;overflow:auto;">	
+			<!--			
+							{% for x in usr %}							
+								<tr>						
+									<td  nowrap> {{ x.rut }}</td>
+									<td  nowrap> {{ x.nombre }}</td>
+								</tr>
+								
+							{% endfor %}
+			-->
+						</tbody>
+					</table>	
+				</div>
+			</div>
+
+			<div class="row-fluid show-grid">
+				<div class="span4"></div>
+					<p>
+						<div class="span1" id="contenedor-botones-asignar">
+							<a class="btn btn-mini btn-success" id="asignar">
+						<i class="icon-chevron-down"></i></a>
+						</div>
+						<div class="span6" id="contenedor-botones-desasignar">
+							<a class="btn btn-mini btn-danger" id="desasignar">
+						<i class="icon-chevron-up"></i></a>
+						</div>
+					</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid show-grid">
+		<div class="span5" id="contenedor-tabla-grupos">		
+			<table class="table table-bordered table-condensed" id="tabla_de_grupos">
+				<thead>
+					<tr>
+						<th style="width: 90%;">Grupos asignados</th>
+						<th style="width: 10%;">
+							
+								<button type="submit" class="btn" id = "crear_grupo"><i class="icon icon-plus"></i></button>
+							
+						</th>
+					</tr>
+				</thead>						
+				<tbody style="max-height:150px;overflow:auto;">	
+				</tbody>					
+			</table>
+		</div>
+
+		
+
+		<div class="span7" id="contenedor-tabla-con-grupos">
+			<p id="grupo"></p>
+			<table class="table table-bordered table-condensed" id="tabla_grupos_asignados">
+				<thead>
+					<tr>
+					<th> <strong> RUT  </strong></th>
+					<th> <strong> Nombre </strong></th>
+					</tr>
+				</thead>
+				<tbody style="max-height:150px;overflow:auto;">	
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="row-fluid show-grid">
+		<div class="span12" id="contenedor-footer">		
+					
+			<a type="button" class="btn btn-primary" id="guardar_distribucion">
+				<i class="icon-hdd"></i>  Guardar Distribución</a>		
+				
+		</div>
+	</div>
+			
+{% endblock %}
