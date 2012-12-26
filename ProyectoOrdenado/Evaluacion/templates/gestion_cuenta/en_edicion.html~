@@ -1,5 +1,0 @@
-{% extends "formularios/base.html" %}
-
-{% block title %}Formularios en edición{% endblock %}
-
-{% block tab_end_edicion %}active{% endblock %}
